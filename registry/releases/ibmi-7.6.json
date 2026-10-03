@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0.0",
+  "release_id": "IBMI-7.6",
+  "product": "IBM i",
+  "version": "7.6",
+  "support_tier": "candidate",
+  "assumptions": [
+    "Exact TR/PTF and compiler levels must be captured during environment registration."
+  ],
+  "required_products": [
+    {
+      "name": "IBM i base operating system",
+      "optional": false
+    },
+    {
+      "name": "ILE RPG compiler",
+      "optional": true
+    },
+    {
+      "name": "Db2 for i SQL development tooling",
+      "optional": true
+    }
+  ],
+  "notes": [
+    "Candidate structural representation only; support and behavior have not been verified."
+  ]
+}

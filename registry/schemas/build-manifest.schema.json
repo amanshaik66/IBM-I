@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://res.example/schemas/build-manifest.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "manifest_id",
+    "manifest_version",
+    "semantic_case_ids",
+    "nodes",
+    "cleanup"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "manifest_id": {
+      "type": "string"
+    },
+    "manifest_version": {
+      "type": "string"
+    },
+    "semantic_case_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^IBMSEM-[A-Z0-9]+-[A-Z0-9]+-[0-9]{4}$"
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "node_id",
+          "source",
+          "source_kind",
+          "object",
+          "target_library",
+          "compile",
+          "prerequisite_nodes",
+          "order_hint",
+          "generated_objects",
+          "authority_expectations",
+          "environment_requirements",
+          "known_interfaces"
+        ],
+        "properties": {
+          "node_id": {
+            "type": "string"
+          },
+          "source": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "member": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "additionalProperties": false
+          },
+          "source_kind": {
+            "enum": [
+              "stream_file",
+              "source_member",
+              "source_less",
+              "vendor_black_box"
+            ]
+          },
+          "object": {
+            "type": "object",
+            "required": [
+              "name",
+              "type"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "target_library": {
+            "type": "string"
+          },
+          "compile": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "command": {
+                "type": "string"
+              },
+              "parameters": {
+                "type": "object"
+              },
+              "target_release": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "activation_group_options": {
+                "type": "object"
+              },
+              "debug_view": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "commitment_options": {
+                "type": "object"
+              },
+              "binding_directories": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "binder_source": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "library_list": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "compiler_options": {
+                "type": "object"
+              }
+            },
+            "additionalProperties": false
+          },
+          "prerequisite_nodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "order_hint": {
+            "type": "integer"
+          },
+          "generated_objects": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "authority_expectations": {
+            "type": "object"
+          },
+          "environment_requirements": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "known_interfaces": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
+    "cleanup": {
+      "type": "object",
+      "required": [
+        "instructions",
+        "verification",
+        "orphan_detection"
+      ],
+      "properties": {
+        "instructions": {
+          "type": "string"
+        },
+        "verification": {
+          "type": "string"
+        },
+        "orphan_detection": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

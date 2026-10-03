@@ -1,0 +1,1238 @@
+{
+  "schema_version": "1.0.0",
+  "estate": "RES",
+  "components": [
+    {
+      "component_id": "RES-FOUND-CONFIG",
+      "domain": "found",
+      "title": "Foundation configuration",
+      "responsibilities": [
+        "enterprise settings",
+        "feature switches"
+      ],
+      "implementation_generations": [
+        "modern_ile"
+      ],
+      "languages": [
+        "RPGLE",
+        "SQL"
+      ],
+      "object_types": [
+        "*SRVPGM",
+        "*DTAARA",
+        "*FILE"
+      ],
+      "libraries": [
+        "RESCOM",
+        "RESCFGx"
+      ],
+      "interfaces": [
+        "procedure:ConfigGet",
+        "file:configuration"
+      ],
+      "depends_on": [],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-FOUND-CALENDAR",
+      "domain": "found",
+      "title": "Business calendar and numbering",
+      "responsibilities": [
+        "business dates",
+        "calendars",
+        "stable identifiers"
+      ],
+      "implementation_generations": [
+        "modern_ile"
+      ],
+      "languages": [
+        "RPGLE",
+        "SQL"
+      ],
+      "object_types": [
+        "*SRVPGM",
+        "*DTAARA",
+        "*FILE"
+      ],
+      "libraries": [
+        "RESCOM",
+        "RESDATA"
+      ],
+      "interfaces": [
+        "procedure:NextId",
+        "procedure:BusinessDate"
+      ],
+      "depends_on": [
+        "RES-FOUND-CONFIG"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-FOUND-COMMON",
+      "domain": "found",
+      "title": "Common ILE services",
+      "responsibilities": [
+        "validation",
+        "errors",
+        "audit correlation",
+        "decimal/date services"
+      ],
+      "implementation_generations": [
+        "ile_rpg"
+      ],
+      "languages": [
+        "RPGLE"
+      ],
+      "object_types": [
+        "*MODULE",
+        "*SRVPGM",
+        "*BNDDIR",
+        "*MSGF"
+      ],
+      "libraries": [
+        "RESCOM"
+      ],
+      "interfaces": [
+        "binding:RESSRV",
+        "messages:RESMSGF"
+      ],
+      "depends_on": [],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-CUST-MASTER",
+      "domain": "cust",
+      "title": "Customer master",
+      "responsibilities": [
+        "customer lifecycle",
+        "addresses",
+        "contacts",
+        "preferences",
+        "history"
+      ],
+      "implementation_generations": [
+        "rpg_iv",
+        "modern_ile"
+      ],
+      "languages": [
+        "RPGLE",
+        "SQLRPGLE"
+      ],
+      "object_types": [
+        "*PGM",
+        "*FILE",
+        "*SRVPGM"
+      ],
+      "libraries": [
+        "RESAPP",
+        "RESDATA"
+      ],
+      "interfaces": [
+        "procedure:CustomerMaintain",
+        "file:CUSTPF"
+      ],
+      "depends_on": [
+        "RES-FOUND-COMMON",
+        "RES-FOUND-CALENDAR"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-CUST-QUERY",
+      "domain": "cust",
+      "title": "Customer search and inquiry",
+      "responsibilities": [
+        "keyed lookup",
+        "multi-criteria search",
+        "history inquiry"
+      ],
+      "implementation_generations": [
+        "rpg_iv",
+        "modern_ile"
+      ],
+      "languages": [
+        "RPGLE",
+        "SQLRPGLE"
+      ],
+      "object_types": [
+        "*PGM",
+        "*FILE"
+      ],
+      "libraries": [
+        "RESAPP",
+        "RESDATA"
+      ],
+      "interfaces": [
+        "program:CUSTLOOK",
+        "service:CustomerQuery"
+      ],
+      "depends_on": [
+        "RES-CUST-MASTER"
+      ],
+      "status": "foundation_fixture"
+    },
+    {
+      "component_id": "RES-ACCT-CORE",
+      "domain": "acct",
+      "title": "Account lifecycle",
+      "responsibilities": [
+        "account types",
+        "status",
+        "balance buckets",
+        "holds"
+      ],
+      "implementation_generations": [
+        "ile_rpg"
+      ],
+      "languages": [
+        "RPGLE",
+        "SQLRPGLE"
+      ],
+      "object_types": [
+        "*PGM",
+        "*SRVPGM",
+        "*FILE"
+      ],
+      "libraries": [
+        "RESAPP",
+        "RESDATA"
+      ],
+      "interfaces": [
+        "service:AccountService"
+      ],
+      "depends_on": [
+        "RES-CUST-MASTER",
+        "RES-FOUND-CALENDAR"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-ACCT-TXN",
+      "domain": "acct",
+      "title": "Account transaction engine",
+      "responsibilities": [
+        "transactions",
+        "adjustments",
+        "history",
+        "balance mutation"
+      ],
+      "implementation_generations": [
+        "ile_rpg"
+      ],
+      "languages": [
+        "RPGLE",
+        "SQLRPGLE"
+      ],
+      "object_types": [
+        "*SRVPGM",
+        "*FILE",
+        "*JRN"
+      ],
+      "libraries": [
+        "RESAPP",
+        "RESDATA"
+      ],
+      "interfaces": [
+        "procedure:PostAccountTxn"
+      ],
+      "depends_on": [
+        "RES-ACCT-CORE"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-PAY-ENTRY",
+      "domain": "pay",
+      "title": "Payment capture and validation",
+      "responsibilities": [
+        "entry",
+        "validation",
+        "authorization",
+        "exceptions"
+      ],
+      "implementation_generations": [
+        "modern_ile"
+      ],
+      "languages": [
+        "SQLRPGLE"
+      ],
+      "object_types": [
+        "*PGM",
+        "*SRVPGM",
+        "*DSPF"
+      ],
+      "libraries": [
+        "RESAPP"
+      ],
+      "interfaces": [
+        "service:PaymentEntry"
+      ],
+      "depends_on": [
+        "RES-CUST-QUERY",
+        "RES-ACCT-CORE"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-PAY-POST",
+      "domain": "pay",
+      "title": "Payment posting",
+      "responsibilities": [
+        "commit posting",
+        "reversal",
+        "return",
+        "outbox"
+      ],
+      "implementation_generations": [
+        "modern_ile"
+      ],
+      "languages": [
+        "SQLRPGLE",
+        "SQL"
+      ],
+      "object_types": [
+        "*PGM",
+        "*SRVPGM",
+        "*FILE",
+        "*JRN",
+        "*DTAQ"
+      ],
+      "libraries": [
+        "RESAPP",
+        "RESDATA",
+        "RESINT"
+      ],
+      "interfaces": [
+        "service:PaymentPost",
+        "queue:PAYPOSTQ"
+      ],
+      "depends_on": [
+        "RES-PAY-ENTRY",
+        "RES-ACCT-TXN"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-PAY-RECON",
+      "domain": "pay",
+      "title": "Payment reconciliation",
+      "responsibilities": [
+        "settlement matching",
+        "difference handling"
+      ],
+      "implementation_generations": [
+        "sql_cobol"
+      ],
+      "languages": [
+        "COBOL",
+        "SQL"
+      ],
+      "object_types": [
+        "*PGM",
+        "*FILE"
+      ],
+      "libraries": [
+        "RESAPP",
+        "RESDATA"
+      ],
+      "interfaces": [
+        "program:PAYRECON"
+      ],
+      "depends_on": [
+        "RES-PAY-POST"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-ORD-CORE",
+      "domain": "ord",
+      "title": "Order management",
+      "responsibilities": [
+        "capture",
+        "lines",
+        "pricing",
+        "status",
+        "cancellation",
+        "return"
+      ],
+      "implementation_generations": [
+        "modern_ile"
+      ],
+      "languages": [
+        "RPGLE",
+        "SQLRPGLE"
+      ],
+      "object_types": [
+        "*PGM",
+        "*SRVPGM",
+        "*FILE"
+      ],
+      "libraries": [
+        "RESAPP",
+        "RESDATA"
+      ],
+      "interfaces": [
+        "service:OrderService"
+      ],
+      "depends_on": [
+        "RES-CUST-MASTER"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-INV-CORE",
+      "domain": "inv",
+      "title": "Inventory control",
+      "responsibilities": [
+        "items",
+        "locations",
+        "stock",
+        "reservations",
+        "movements"
+      ],
+      "implementation_generations": [
+        "ile_rpg"
+      ],
+      "languages": [
+        "RPGLE",
+        "SQLRPGLE"
+      ],
+      "object_types": [
+        "*SRVPGM",
+        "*FILE",
+        "*DTAQ"
+      ],
+      "libraries": [
+        "RESAPP",
+        "RESDATA"
+      ],
+      "interfaces": [
+        "service:InventoryService"
+      ],
+      "depends_on": [
+        "RES-ORD-CORE"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-INV-REPLEN",
+      "domain": "inv",
+      "title": "Replenishment worker",
+      "responsibilities": [
+        "reorder calculation",
+        "stock transfer"
+      ],
+      "implementation_generations": [
+        "batch_cobol"
+      ],
+      "languages": [
+        "COBOL",
+        "SQL"
+      ],
+      "object_types": [
+        "*PGM",
+        "*FILE"
+      ],
+      "libraries": [
+        "RESAPP"
+      ],
+      "interfaces": [
+        "program:INVREPL"
+      ],
+      "depends_on": [
+        "RES-INV-CORE"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-BILL-INVOICE",
+      "domain": "bill",
+      "title": "Invoice engine",
+      "responsibilities": [
+        "charges",
+        "credits",
+        "invoice generation"
+      ],
+      "implementation_generations": [
+        "modern_sql"
+      ],
+      "languages": [
+        "SQLRPGLE",
+        "SQL"
+      ],
+      "object_types": [
+        "*PGM",
+        "*SRVPGM",
+        "*FILE"
+      ],
+      "libraries": [
+        "RESAPP",
+        "RESDATA"
+      ],
+      "interfaces": [
+        "service:InvoiceService"
+      ],
+      "depends_on": [
+        "RES-ORD-CORE"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-BILL-COLLECT",
+      "domain": "bill",
+      "title": "Cash application and collections",
+      "responsibilities": [
+        "payment application",
+        "aging",
+        "collections"
+      ],
+      "implementation_generations": [
+        "ile_cobol"
+      ],
+      "languages": [
+        "COBOL",
+        "SQL"
+      ],
+      "object_types": [
+        "*PGM",
+        "*FILE",
+        "*MSGQ"
+      ],
+      "libraries": [
+        "RESAPP",
+        "RESDATA"
+      ],
+      "interfaces": [
+        "program:CASHAPPL"
+      ],
+      "depends_on": [
+        "RES-BILL-INVOICE",
+        "RES-PAY-POST"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-GL-LEGACY",
+      "domain": "gl",
+      "title": "Legacy general ledger",
+      "responsibilities": [
+        "chart",
+        "journal posting",
+        "balances",
+        "subledger links"
+      ],
+      "implementation_generations": [
+        "fixed_rpg_iv",
+        "ile_cobol"
+      ],
+      "languages": [
+        "RPGLE",
+        "COBOL"
+      ],
+      "object_types": [
+        "*PGM",
+        "*FILE",
+        "*JRN"
+      ],
+      "libraries": [
+        "RESLEG",
+        "RESDATA"
+      ],
+      "interfaces": [
+        "program:GLPOST",
+        "file:GLJRNPF"
+      ],
+      "depends_on": [
+        "RES-FOUND-COMMON"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-GL-GATEWAY",
+      "domain": "gl",
+      "title": "Accounting posting gateway",
+      "responsibilities": [
+        "typed ledger API",
+        "legacy parameter translation",
+        "balance validation"
+      ],
+      "implementation_generations": [
+        "modern_ile"
+      ],
+      "languages": [
+        "RPGLE",
+        "SQLRPGLE"
+      ],
+      "object_types": [
+        "*SRVPGM",
+        "*MODULE",
+        "*BNDDIR"
+      ],
+      "libraries": [
+        "RESAPP",
+        "RESCOM"
+      ],
+      "interfaces": [
+        "service:LedgerGateway"
+      ],
+      "depends_on": [
+        "RES-GL-LEGACY"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-GL-CLOSE",
+      "domain": "gl",
+      "title": "Period close and reconciliation",
+      "responsibilities": [
+        "period close",
+        "adjustments",
+        "trial balance"
+      ],
+      "implementation_generations": [
+        "cl_cobol"
+      ],
+      "languages": [
+        "CLLE",
+        "COBOL",
+        "SQL"
+      ],
+      "object_types": [
+        "*PGM",
+        "*FILE",
+        "*JOBQ"
+      ],
+      "libraries": [
+        "RESAPP",
+        "RESOPS"
+      ],
+      "interfaces": [
+        "command:RESCLOSE"
+      ],
+      "depends_on": [
+        "RES-GL-GATEWAY"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-TRADE-CORE",
+      "domain": "trade",
+      "title": "Trade capture and allocation",
+      "responsibilities": [
+        "orders",
+        "trades",
+        "allocations",
+        "confirmations"
+      ],
+      "implementation_generations": [
+        "ile_cobol"
+      ],
+      "languages": [
+        "COBOL",
+        "SQL"
+      ],
+      "object_types": [
+        "*PGM",
+        "*FILE"
+      ],
+      "libraries": [
+        "RESAPP",
+        "RESDATA"
+      ],
+      "interfaces": [
+        "program:TRDALLOC"
+      ],
+      "depends_on": [
+        "RES-CUST-MASTER"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-TRADE-SETTLE",
+      "domain": "trade",
+      "title": "Settlement and positions",
+      "responsibilities": [
+        "settlement",
+        "positions",
+        "exceptions"
+      ],
+      "implementation_generations": [
+        "sql_cobol"
+      ],
+      "languages": [
+        "COBOL",
+        "SQL"
+      ],
+      "object_types": [
+        "*PGM",
+        "*FILE",
+        "*DTAQ"
+      ],
+      "libraries": [
+        "RESAPP",
+        "RESDATA"
+      ],
+      "interfaces": [
+        "program:TRDSETTL"
+      ],
+      "depends_on": [
+        "RES-TRADE-CORE",
+        "RES-GL-GATEWAY"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-UI-CORE",
+      "domain": "ui",
+      "title": "5250 application shell",
+      "responsibilities": [
+        "menu",
+        "context",
+        "message subfile",
+        "navigation"
+      ],
+      "implementation_generations": [
+        "ile_rpg"
+      ],
+      "languages": [
+        "RPGLE",
+        "DDS"
+      ],
+      "object_types": [
+        "*PGM",
+        "*FILE"
+      ],
+      "libraries": [
+        "RESAPP"
+      ],
+      "interfaces": [
+        "display:RESMENU"
+      ],
+      "depends_on": [
+        "RES-FOUND-COMMON"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-UI-SERVICE",
+      "domain": "ui",
+      "title": "5250 customer and finance screens",
+      "responsibilities": [
+        "customer search",
+        "account inquiry",
+        "payment entry",
+        "order inquiry"
+      ],
+      "implementation_generations": [
+        "rpg_iv",
+        "ile_rpg"
+      ],
+      "languages": [
+        "RPGLE",
+        "DDS"
+      ],
+      "object_types": [
+        "*PGM",
+        "*FILE"
+      ],
+      "libraries": [
+        "RESAPP"
+      ],
+      "interfaces": [
+        "display:RESSVC"
+      ],
+      "depends_on": [
+        "RES-UI-CORE",
+        "RES-CUST-QUERY",
+        "RES-ACCT-CORE",
+        "RES-PAY-ENTRY"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-UI-OPS",
+      "domain": "ui",
+      "title": "5250 operations console",
+      "responsibilities": [
+        "job dashboard",
+        "exceptions",
+        "queues",
+        "spool"
+      ],
+      "implementation_generations": [
+        "ile_rpg"
+      ],
+      "languages": [
+        "RPGLE",
+        "DDS",
+        "SQL"
+      ],
+      "object_types": [
+        "*PGM",
+        "*FILE",
+        "*MSGQ"
+      ],
+      "libraries": [
+        "RESOPS"
+      ],
+      "interfaces": [
+        "display:RESOPR"
+      ],
+      "depends_on": [
+        "RES-UI-CORE"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-BATCH-CONTROL",
+      "domain": "batch",
+      "title": "Batch run controller",
+      "responsibilities": [
+        "dependency graph",
+        "submission",
+        "checkpoint",
+        "restart"
+      ],
+      "implementation_generations": [
+        "clle"
+      ],
+      "languages": [
+        "CLLE",
+        "SQLRPGLE"
+      ],
+      "object_types": [
+        "*PGM",
+        "*CMD",
+        "*JOBD",
+        "*JOBQ",
+        "*SBSD",
+        "*DTAARA"
+      ],
+      "libraries": [
+        "RESOPS"
+      ],
+      "interfaces": [
+        "command:RESBATCH"
+      ],
+      "depends_on": [
+        "RES-FOUND-CALENDAR"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-BATCH-EOD",
+      "domain": "batch",
+      "title": "End-of-day graph",
+      "responsibilities": [
+        "freeze boundary",
+        "subledger close",
+        "reports",
+        "advance date"
+      ],
+      "implementation_generations": [
+        "clle"
+      ],
+      "languages": [
+        "CLLE"
+      ],
+      "object_types": [
+        "*PGM",
+        "*JOBQ",
+        "*MSGQ"
+      ],
+      "libraries": [
+        "RESOPS"
+      ],
+      "interfaces": [
+        "command:RESEOD"
+      ],
+      "depends_on": [
+        "RES-BATCH-CONTROL",
+        "RES-GL-CLOSE"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-OPS-MESSAGES",
+      "domain": "ops",
+      "title": "Operational messaging",
+      "responsibilities": [
+        "message catalog",
+        "inquiry/reply",
+        "MSGW",
+        "alerts"
+      ],
+      "implementation_generations": [
+        "clle"
+      ],
+      "languages": [
+        "CLLE",
+        "RPGLE"
+      ],
+      "object_types": [
+        "*MSGF",
+        "*MSGQ",
+        "*PGM"
+      ],
+      "libraries": [
+        "RESCOM",
+        "RESOPS"
+      ],
+      "interfaces": [
+        "messages:RESMSGF",
+        "queue:RESOPR"
+      ],
+      "depends_on": [
+        "RES-FOUND-COMMON"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-OPS-MONITOR",
+      "domain": "ops",
+      "title": "Job queue and object monitor",
+      "responsibilities": [
+        "job status",
+        "locks",
+        "queues",
+        "object inventory"
+      ],
+      "implementation_generations": [
+        "ile_rpg_rexx"
+      ],
+      "languages": [
+        "RPGLE",
+        "REXX",
+        "SQL"
+      ],
+      "object_types": [
+        "*PGM",
+        "*USRSPC"
+      ],
+      "libraries": [
+        "RESOPS"
+      ],
+      "interfaces": [
+        "service:OpsMonitor"
+      ],
+      "depends_on": [
+        "RES-OPS-MESSAGES"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-RPT-ENGINE",
+      "domain": "rpt",
+      "title": "Report and statement engine",
+      "responsibilities": [
+        "statements",
+        "financial reports",
+        "audit reports"
+      ],
+      "implementation_generations": [
+        "rpg_cobol"
+      ],
+      "languages": [
+        "RPGLE",
+        "COBOL",
+        "SQL"
+      ],
+      "object_types": [
+        "*PGM",
+        "*FILE"
+      ],
+      "libraries": [
+        "RESRPT"
+      ],
+      "interfaces": [
+        "program:RPTGEN"
+      ],
+      "depends_on": [
+        "RES-ACCT-TXN",
+        "RES-GL-GATEWAY"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-RPT-ROUTER",
+      "domain": "rpt",
+      "title": "Spool and archive router",
+      "responsibilities": [
+        "OUTQ routing",
+        "hold/release",
+        "IFS archive"
+      ],
+      "implementation_generations": [
+        "clle_qshell"
+      ],
+      "languages": [
+        "CLLE",
+        "QShell"
+      ],
+      "object_types": [
+        "*PGM",
+        "*OUTQ",
+        "*FILE"
+      ],
+      "libraries": [
+        "RESRPT",
+        "RESOPS"
+      ],
+      "interfaces": [
+        "command:RESPROUT"
+      ],
+      "depends_on": [
+        "RES-RPT-ENGINE"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-DOC-INTAKE",
+      "domain": "doc",
+      "title": "Document intake",
+      "responsibilities": [
+        "landing",
+        "validation",
+        "quarantine",
+        "archive"
+      ],
+      "implementation_generations": [
+        "cobol_qshell"
+      ],
+      "languages": [
+        "COBOL",
+        "QShell",
+        "PASE"
+      ],
+      "object_types": [
+        "*PGM",
+        "*FILE"
+      ],
+      "libraries": [
+        "RESINT"
+      ],
+      "interfaces": [
+        "service:DocumentIntake"
+      ],
+      "depends_on": [
+        "RES-FOUND-COMMON"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-DOC-EXPORT",
+      "domain": "doc",
+      "title": "Outbound document builder",
+      "responsibilities": [
+        "CSV",
+        "fixed",
+        "XML",
+        "JSON",
+        "archive manifests"
+      ],
+      "implementation_generations": [
+        "modern_ile"
+      ],
+      "languages": [
+        "SQLRPGLE",
+        "QShell"
+      ],
+      "object_types": [
+        "*PGM",
+        "*FILE"
+      ],
+      "libraries": [
+        "RESINT"
+      ],
+      "interfaces": [
+        "service:DocumentExport"
+      ],
+      "depends_on": [
+        "RES-DOC-INTAKE"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-INT-GATEWAY",
+      "domain": "int",
+      "title": "Integration gateway",
+      "responsibilities": [
+        "inbox/outbox",
+        "routing",
+        "correlation",
+        "retry"
+      ],
+      "implementation_generations": [
+        "modern_ile"
+      ],
+      "languages": [
+        "SQLRPGLE"
+      ],
+      "object_types": [
+        "*SRVPGM",
+        "*DTAQ",
+        "*FILE"
+      ],
+      "libraries": [
+        "RESINT"
+      ],
+      "interfaces": [
+        "service:IntegrationGateway"
+      ],
+      "depends_on": [
+        "RES-FOUND-COMMON"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-INT-WEB",
+      "domain": "int",
+      "title": "HTTP and SOAP channels",
+      "responsibilities": [
+        "REST",
+        "SOAP",
+        "JDBC service access"
+      ],
+      "implementation_generations": [
+        "java"
+      ],
+      "languages": [
+        "Java"
+      ],
+      "object_types": [
+        "*PGM"
+      ],
+      "libraries": [
+        "RESINT"
+      ],
+      "interfaces": [
+        "endpoint:RESAPI"
+      ],
+      "depends_on": [
+        "RES-INT-GATEWAY"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-INT-SOCKET",
+      "domain": "int",
+      "title": "Socket and binary adapter",
+      "responsibilities": [
+        "framing",
+        "binary payloads",
+        "system APIs"
+      ],
+      "implementation_generations": [
+        "ile_c_cpp"
+      ],
+      "languages": [
+        "C",
+        "C++"
+      ],
+      "object_types": [
+        "*PGM",
+        "*MODULE",
+        "*SRVPGM",
+        "*USRSPC"
+      ],
+      "libraries": [
+        "RESINT"
+      ],
+      "interfaces": [
+        "service:SocketAdapter"
+      ],
+      "depends_on": [
+        "RES-INT-GATEWAY"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-SEC-AUTH",
+      "domain": "sec",
+      "title": "Application authorization",
+      "responsibilities": [
+        "roles",
+        "separation of duties",
+        "policy checks"
+      ],
+      "implementation_generations": [
+        "modern_ile"
+      ],
+      "languages": [
+        "RPGLE",
+        "SQL"
+      ],
+      "object_types": [
+        "*SRVPGM",
+        "*FILE",
+        "*AUTL"
+      ],
+      "libraries": [
+        "RESSEC",
+        "RESDATA"
+      ],
+      "interfaces": [
+        "service:Authorization"
+      ],
+      "depends_on": [
+        "RES-FOUND-COMMON"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-SEC-PRIV",
+      "domain": "sec",
+      "title": "Privileged operation gateway",
+      "responsibilities": [
+        "adopted authority",
+        "audited privileged commands"
+      ],
+      "implementation_generations": [
+        "clle_ile"
+      ],
+      "languages": [
+        "CLLE",
+        "RPGLE"
+      ],
+      "object_types": [
+        "*PGM",
+        "*CMD",
+        "*AUTL"
+      ],
+      "libraries": [
+        "RESSEC"
+      ],
+      "interfaces": [
+        "command:RESPRIV"
+      ],
+      "depends_on": [
+        "RES-SEC-AUTH"
+      ],
+      "status": "planned"
+    },
+    {
+      "component_id": "RES-VEND-BLACKBOX",
+      "domain": "vend",
+      "title": "Vendor black-box service",
+      "responsibilities": [
+        "stable proprietary interface",
+        "observable contract only"
+      ],
+      "implementation_generations": [
+        "source_less"
+      ],
+      "languages": [],
+      "object_types": [
+        "*SRVPGM"
+      ],
+      "libraries": [
+        "RESVEND"
+      ],
+      "interfaces": [
+        "service:VendorRisk"
+      ],
+      "depends_on": [],
+      "status": "planned"
+    }
+  ]
+}

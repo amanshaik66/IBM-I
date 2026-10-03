@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://res.example/schemas/object-provenance.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source",
+    "source_commit",
+    "build_manifest",
+    "compile",
+    "target",
+    "resulting_object",
+    "semantic_case_ids",
+    "evidence_refs"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "source": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "source_commit": {
+      "type": "string"
+    },
+    "build_manifest": {
+      "type": "object",
+      "required": [
+        "id",
+        "version",
+        "sha256"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
+    },
+    "compile": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "command": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    "target": {
+      "type": "object",
+      "required": [
+        "environment_id",
+        "library"
+      ],
+      "properties": {
+        "environment_id": {
+          "type": "string"
+        },
+        "library": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "resulting_object": {
+      "type": "object"
+    },
+    "semantic_case_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^IBMSEM-[A-Z0-9]+-[A-Z0-9]+-[0-9]{4}$"
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+      },
+      "minItems": 1
+    }
+  }
+}

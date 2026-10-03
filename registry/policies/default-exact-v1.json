@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0.0",
+  "policy_id": "default-exact",
+  "version": "1.0.0",
+  "reviewed": true,
+  "rules": [
+    {
+      "path": "$",
+      "operation": "ordered_events",
+      "parameters": {
+        "exact": true
+      },
+      "rationale": "Default comparisons are strict; exceptions require an explicit reviewed rule."
+    },
+    {
+      "path": "$.numeric",
+      "operation": "exact_numeric",
+      "parameters": {},
+      "rationale": "Never introduce numeric tolerance implicitly."
+    },
+    {
+      "path": "$.binary",
+      "operation": "binary_exact",
+      "parameters": {},
+      "rationale": "Binary observations compare byte-for-byte by default."
+    }
+  ]
+}

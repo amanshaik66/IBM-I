@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://res.example/schemas/artifact.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_type",
+    "sha256",
+    "media_type",
+    "size_bytes",
+    "logical_role",
+    "storage_locator",
+    "created_at",
+    "execution_id"
+  ],
+  "properties": {
+    "artifact_type": {
+      "enum": [
+        "compiler_listing",
+        "job_log",
+        "spool_file",
+        "database_snapshot",
+        "journal_extract",
+        "queue_dump",
+        "filesystem_file",
+        "binary_payload",
+        "screen_capture",
+        "structured_trace",
+        "other"
+      ]
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "media_type": {
+      "type": "string"
+    },
+    "size_bytes": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "logical_role": {
+      "type": "string"
+    },
+    "storage_locator": {
+      "type": "string",
+      "pattern": "^sha256/[0-9a-f]{2}/[0-9a-f]{64}$"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "execution_id": {
+      "type": "string"
+    }
+  }
+}

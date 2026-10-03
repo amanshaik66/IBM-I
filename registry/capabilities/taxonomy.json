@@ -1,0 +1,300 @@
+{
+  "schema_version": "1.0.0",
+  "completeness": "partial_seed_taxonomy",
+  "capabilities": [
+    {
+      "capability_id": "IBMICAP-RPG-CHAIN",
+      "title": "CHAIN keyed access",
+      "category": "native_io",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-RPG-SETLL",
+      "title": "SETLL positioning",
+      "category": "native_io",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-RPG-READE",
+      "title": "READE equal-key iteration",
+      "category": "native_io",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-RPG-READP",
+      "title": "Reverse keyed reads",
+      "category": "native_io",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-RPG-WRITE",
+      "title": "Native record WRITE",
+      "category": "native_io",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-RPG-UPDATE",
+      "title": "Native record UPDATE",
+      "category": "native_io",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-RPG-DELETE",
+      "title": "Native record DELETE",
+      "category": "native_io",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-DDS-PF",
+      "title": "DDS physical files",
+      "category": "database",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-DDS-LF",
+      "title": "DDS logical/access paths",
+      "category": "database",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-DB-MEMBER",
+      "title": "Database members and aliases",
+      "category": "database",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-DB-COMMIT",
+      "title": "Commitment control",
+      "category": "database",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-DB-JOURNAL",
+      "title": "Journaling and receivers",
+      "category": "database",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-DB-LOCK",
+      "title": "Record/object locking",
+      "category": "database",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-DB-CONSTRAINT",
+      "title": "SQL constraints and triggers",
+      "category": "database",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-DB-DECIMAL",
+      "title": "Decimal/null/date/CCSID semantics",
+      "category": "database",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-SQL-EMBEDDED",
+      "title": "Embedded SQL and cursors",
+      "category": "sql",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-SQL-PROCEDURE",
+      "title": "SQL routines and dynamic SQL",
+      "category": "sql",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-ILE-SRVPGM",
+      "title": "ILE service programs/modules",
+      "category": "ile",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-ILE-BIND",
+      "title": "Binding directories/signatures",
+      "category": "ile",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-PGM-CALL",
+      "title": "Program and dynamic calls",
+      "category": "ile",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-CLLE",
+      "title": "CL/CLLE orchestration",
+      "category": "language",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-COBOL-BATCH",
+      "title": "COBOL and SQL COBOL batch",
+      "category": "language",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-C-SOCKET",
+      "title": "ILE C/C++ sockets and APIs",
+      "category": "language",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-JAVA-HTTP",
+      "title": "Java HTTP/SOAP/JDBC",
+      "category": "language",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-QSH-PASE",
+      "title": "QShell and PASE processing",
+      "category": "language",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-REXX-OPS",
+      "title": "REXX operator diagnostics",
+      "category": "language",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-JOB-SBMJOB",
+      "title": "Submitted jobs and scheduling",
+      "category": "work_management",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-JOB-SBSD",
+      "title": "Subsystem/JOBQ/JOBD/routing",
+      "category": "work_management",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-JOB-PRESTART",
+      "title": "Prestart/autostart workers",
+      "category": "work_management",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-JOB-STATUS",
+      "title": "Job states/logs/priorities",
+      "category": "work_management",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-MSG-INQUIRY",
+      "title": "Inquiry/reply/MSGW",
+      "category": "messaging",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-MSG-ESCAPE",
+      "title": "Program diagnostic/escape/completion",
+      "category": "messaging",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-DTAQ",
+      "title": "Data queue asynchronous work",
+      "category": "async",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-DTAARA",
+      "title": "Data area configuration/control",
+      "category": "async",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-5250-DSPF",
+      "title": "Display files/indicators/messages",
+      "category": "interactive",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-5250-SUBFILE",
+      "title": "Subfiles and pagination",
+      "category": "interactive",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-SPOOL-PRTF",
+      "title": "Printer files and spool",
+      "category": "reporting",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-SPOOL-OUTQ",
+      "title": "Output queue routing/control",
+      "category": "reporting",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-IFS-STREAM",
+      "title": "IFS stream and archive files",
+      "category": "ifs",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-IFS-CCSID",
+      "title": "IFS authority and CCSID conversion",
+      "category": "ifs",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-SEC-AUTH",
+      "title": "Profiles/groups/object and file authority",
+      "category": "security",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-SEC-AUTL",
+      "title": "Authorization lists",
+      "category": "security",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-SEC-ADOPT",
+      "title": "Adopted authority",
+      "category": "security",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-CMD",
+      "title": "Commands and command processing",
+      "category": "objects",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-API-USRSPC",
+      "title": "System APIs and user spaces",
+      "category": "apis",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-INTEG-MQ",
+      "title": "IBM MQ contract integration",
+      "category": "integration",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-LIBL-RESOLUTION",
+      "title": "Library lists/overrides/object resolution",
+      "category": "resolution",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-FAILURE-RECOVERY",
+      "title": "Failure, restart and orphan cleanup",
+      "category": "recovery",
+      "scope_status": "candidate"
+    },
+    {
+      "capability_id": "IBMICAP-USRIDX-QUEUE",
+      "title": "User index/user queue facilities",
+      "category": "specialized",
+      "scope_status": "candidate"
+    }
+  ]
+}

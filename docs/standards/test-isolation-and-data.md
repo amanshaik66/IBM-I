@@ -1,0 +1,5 @@
+# Test isolation and deterministic data
+
+Each case declares isolation across library, schema, user profile, job, QTEMP, library list, job description, job queue, subsystem, output queue, message queue, data queue, journal, spool, filesystem path, and external-integration namespace as needed. The scheduler leases all declared dimensions, not just a library.
+
+Fixtures use stable IDs: customers `RESC########`, accounts `RESA########`, transactions `REST################`, and correlation IDs derived from semantic ID plus execution ID. Business dates come from a captured virtual/test clock. Queue payloads are canonical UTF-8 or explicitly tagged with CCSID; seeded datasets have a version and SHA-256. Randomness is prohibited unless its algorithm and seed are recorded in evidence. Authorities derive from registered personas. Setup validates a clean precondition, and cleanup restores the initial snapshot. Cleanup verification inventories every declared dimension; discrepancies become orphan records and block lease reuse.

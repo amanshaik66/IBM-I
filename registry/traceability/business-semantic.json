@@ -1,0 +1,500 @@
+{
+  "schema_version": "1.0.0",
+  "semantic_links": [
+    {
+      "semantic_id": "IBMSEM-CL-CALL-0001",
+      "capability_ids": [
+        "IBMICAP-PGM-CALL"
+      ],
+      "component_ids": [
+        "RES-GL-GATEWAY",
+        "RES-GL-LEGACY"
+      ],
+      "workflow_ids": [
+        "RES-WF-GL-0001"
+      ]
+    },
+    {
+      "semantic_id": "IBMSEM-CL-PROGRAM-0001",
+      "capability_ids": [
+        "IBMICAP-CLLE"
+      ],
+      "component_ids": [
+        "RES-BATCH-CONTROL"
+      ],
+      "workflow_ids": [
+        "RES-WF-OPS-0002"
+      ]
+    },
+    {
+      "semantic_id": "IBMSEM-DDS-LF-0001",
+      "capability_ids": [
+        "IBMICAP-DDS-LF"
+      ],
+      "component_ids": [
+        "RES-CUST-QUERY",
+        "RES-GL-LEGACY"
+      ],
+      "workflow_ids": [
+        "RES-WF-CUST-0002"
+      ]
+    },
+    {
+      "semantic_id": "IBMSEM-DDS-PF-0001",
+      "capability_ids": [
+        "IBMICAP-DDS-PF"
+      ],
+      "component_ids": [
+        "RES-CUST-MASTER",
+        "RES-GL-LEGACY"
+      ],
+      "workflow_ids": [
+        "RES-WF-CUST-0001"
+      ]
+    },
+    {
+      "semantic_id": "IBMSEM-RPG-CHAIN-0001",
+      "capability_ids": [
+        "IBMICAP-RPG-CHAIN"
+      ],
+      "component_ids": [
+        "RES-CUST-QUERY",
+        "RES-ACCT-CORE"
+      ],
+      "workflow_ids": [
+        "RES-WF-CUST-0002",
+        "RES-WF-ACCT-0001"
+      ]
+    },
+    {
+      "semantic_id": "IBMSEM-RPG-CHAIN-0002",
+      "capability_ids": [
+        "IBMICAP-RPG-CHAIN"
+      ],
+      "component_ids": [
+        "RES-CUST-QUERY",
+        "RES-ACCT-CORE"
+      ],
+      "workflow_ids": [
+        "RES-WF-CUST-0002",
+        "RES-WF-ACCT-0001"
+      ]
+    },
+    {
+      "semantic_id": "IBMSEM-RPG-PROGRAM-0001",
+      "capability_ids": [
+        "IBMICAP-ILE-SRVPGM"
+      ],
+      "component_ids": [
+        "RES-FOUND-COMMON",
+        "RES-GL-GATEWAY"
+      ],
+      "workflow_ids": [
+        "RES-WF-CUST-0001"
+      ]
+    },
+    {
+      "semantic_id": "IBMSEM-RPG-UPDATE-0001",
+      "capability_ids": [
+        "IBMICAP-RPG-UPDATE"
+      ],
+      "component_ids": [
+        "RES-ACCT-TXN",
+        "RES-PAY-POST"
+      ],
+      "workflow_ids": [
+        "RES-WF-PAY-0002"
+      ]
+    },
+    {
+      "semantic_id": "IBMSEM-RPG-WRITE-0001",
+      "capability_ids": [
+        "IBMICAP-RPG-WRITE"
+      ],
+      "component_ids": [
+        "RES-ACCT-TXN"
+      ],
+      "workflow_ids": [
+        "RES-WF-PAY-0001"
+      ]
+    },
+    {
+      "semantic_id": "IBMSEM-SQL-SELECT-0001",
+      "capability_ids": [
+        "IBMICAP-SQL-EMBEDDED"
+      ],
+      "component_ids": [
+        "RES-PAY-POST",
+        "RES-ACCT-TXN"
+      ],
+      "workflow_ids": [
+        "RES-WF-ACCT-0001",
+        "RES-WF-PAY-0001"
+      ]
+    }
+  ],
+  "workflow_links": [
+    {
+      "workflow_id": "RES-WF-CUST-0001",
+      "component_ids": [
+        "RES-CUST-MASTER",
+        "RES-ACCT-CORE"
+      ],
+      "capability_ids": [
+        "IBMICAP-DB-COMMIT",
+        "IBMICAP-ILE-SRVPGM",
+        "IBMICAP-SEC-AUTH",
+        "IBMICAP-DDS-PF"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-RPG-PROGRAM-0001",
+        "IBMSEM-DDS-PF-0001"
+      ],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-CUST-0002",
+      "component_ids": [
+        "RES-CUST-QUERY",
+        "RES-UI-SERVICE"
+      ],
+      "capability_ids": [
+        "IBMICAP-RPG-CHAIN",
+        "IBMICAP-RPG-SETLL",
+        "IBMICAP-RPG-READE",
+        "IBMICAP-DDS-LF",
+        "IBMICAP-5250-SUBFILE"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-RPG-CHAIN-0001",
+        "IBMSEM-RPG-CHAIN-0002",
+        "IBMSEM-DDS-LF-0001"
+      ],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-ACCT-0001",
+      "component_ids": [
+        "RES-ACCT-CORE",
+        "RES-ACCT-TXN",
+        "RES-UI-SERVICE"
+      ],
+      "capability_ids": [
+        "IBMICAP-RPG-CHAIN",
+        "IBMICAP-RPG-READP",
+        "IBMICAP-SQL-EMBEDDED",
+        "IBMICAP-5250-SUBFILE"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-RPG-CHAIN-0001",
+        "IBMSEM-RPG-CHAIN-0002",
+        "IBMSEM-SQL-SELECT-0001"
+      ],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-PAY-0001",
+      "component_ids": [
+        "RES-PAY-ENTRY",
+        "RES-PAY-POST",
+        "RES-ACCT-TXN",
+        "RES-GL-GATEWAY"
+      ],
+      "capability_ids": [
+        "IBMICAP-DB-COMMIT",
+        "IBMICAP-DB-JOURNAL",
+        "IBMICAP-DTAQ",
+        "IBMICAP-SQL-EMBEDDED",
+        "IBMICAP-RPG-WRITE"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-SQL-SELECT-0001",
+        "IBMSEM-RPG-WRITE-0001"
+      ],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-PAY-0002",
+      "component_ids": [
+        "RES-PAY-POST",
+        "RES-ACCT-TXN",
+        "RES-GL-GATEWAY"
+      ],
+      "capability_ids": [
+        "IBMICAP-DB-COMMIT",
+        "IBMICAP-RPG-UPDATE",
+        "IBMICAP-MSG-ESCAPE"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-RPG-UPDATE-0001"
+      ],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-PAY-0003",
+      "component_ids": [
+        "RES-PAY-RECON",
+        "RES-DOC-INTAKE"
+      ],
+      "capability_ids": [
+        "IBMICAP-IFS-STREAM",
+        "IBMICAP-DB-MEMBER",
+        "IBMICAP-COBOL-BATCH"
+      ],
+      "semantic_case_ids": [],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-ORD-0001",
+      "component_ids": [
+        "RES-ORD-CORE",
+        "RES-INV-CORE",
+        "RES-BILL-INVOICE"
+      ],
+      "capability_ids": [
+        "IBMICAP-DB-CONSTRAINT",
+        "IBMICAP-DB-LOCK",
+        "IBMICAP-DTAQ"
+      ],
+      "semantic_case_ids": [],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-INV-0001",
+      "component_ids": [
+        "RES-INV-REPLEN",
+        "RES-INV-CORE"
+      ],
+      "capability_ids": [
+        "IBMICAP-JOB-SBMJOB",
+        "IBMICAP-COBOL-BATCH",
+        "IBMICAP-SPOOL-PRTF"
+      ],
+      "semantic_case_ids": [],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-BILL-0001",
+      "component_ids": [
+        "RES-BILL-INVOICE",
+        "RES-BILL-COLLECT"
+      ],
+      "capability_ids": [
+        "IBMICAP-SQL-PROCEDURE",
+        "IBMICAP-DB-DECIMAL",
+        "IBMICAP-SPOOL-PRTF"
+      ],
+      "semantic_case_ids": [],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-GL-0001",
+      "component_ids": [
+        "RES-GL-GATEWAY",
+        "RES-GL-LEGACY"
+      ],
+      "capability_ids": [
+        "IBMICAP-ILE-BIND",
+        "IBMICAP-COBOL-BATCH",
+        "IBMICAP-DB-JOURNAL",
+        "IBMICAP-PGM-CALL"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-CL-CALL-0001"
+      ],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-GL-0002",
+      "component_ids": [
+        "RES-GL-CLOSE",
+        "RES-BATCH-CONTROL",
+        "RES-RPT-ENGINE"
+      ],
+      "capability_ids": [
+        "IBMICAP-JOB-SBMJOB",
+        "IBMICAP-MSG-INQUIRY",
+        "IBMICAP-SPOOL-OUTQ"
+      ],
+      "semantic_case_ids": [],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-TRD-0001",
+      "component_ids": [
+        "RES-TRADE-CORE",
+        "RES-TRADE-SETTLE",
+        "RES-GL-GATEWAY"
+      ],
+      "capability_ids": [
+        "IBMICAP-COBOL-BATCH",
+        "IBMICAP-DB-DECIMAL",
+        "IBMICAP-DTAQ"
+      ],
+      "semantic_case_ids": [],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-EOD-0001",
+      "component_ids": [
+        "RES-BATCH-EOD",
+        "RES-BATCH-CONTROL",
+        "RES-GL-CLOSE",
+        "RES-RPT-ENGINE"
+      ],
+      "capability_ids": [
+        "IBMICAP-JOB-SBMJOB",
+        "IBMICAP-JOB-SBSD",
+        "IBMICAP-MSG-INQUIRY",
+        "IBMICAP-SPOOL-OUTQ",
+        "IBMICAP-DTAARA"
+      ],
+      "semantic_case_ids": [],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-OPS-0001",
+      "component_ids": [
+        "RES-OPS-MESSAGES",
+        "RES-UI-OPS"
+      ],
+      "capability_ids": [
+        "IBMICAP-MSG-INQUIRY",
+        "IBMICAP-5250-DSPF"
+      ],
+      "semantic_case_ids": [],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-OPS-0002",
+      "component_ids": [
+        "RES-OPS-MONITOR",
+        "RES-BATCH-CONTROL"
+      ],
+      "capability_ids": [
+        "IBMICAP-API-USRSPC",
+        "IBMICAP-JOB-STATUS",
+        "IBMICAP-CLLE",
+        "IBMICAP-REXX-OPS"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-CL-PROGRAM-0001"
+      ],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-RPT-0001",
+      "component_ids": [
+        "RES-RPT-ENGINE",
+        "RES-RPT-ROUTER",
+        "RES-DOC-EXPORT"
+      ],
+      "capability_ids": [
+        "IBMICAP-SPOOL-PRTF",
+        "IBMICAP-SPOOL-OUTQ",
+        "IBMICAP-IFS-STREAM"
+      ],
+      "semantic_case_ids": [],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-DOC-0001",
+      "component_ids": [
+        "RES-DOC-INTAKE",
+        "RES-INT-GATEWAY"
+      ],
+      "capability_ids": [
+        "IBMICAP-IFS-CCSID",
+        "IBMICAP-QSH-PASE",
+        "IBMICAP-DB-MEMBER"
+      ],
+      "semantic_case_ids": [],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-INT-0001",
+      "component_ids": [
+        "RES-INT-GATEWAY",
+        "RES-PAY-POST"
+      ],
+      "capability_ids": [
+        "IBMICAP-INTEG-MQ",
+        "IBMICAP-DTAQ",
+        "IBMICAP-DB-COMMIT"
+      ],
+      "semantic_case_ids": [],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-INT-0002",
+      "component_ids": [
+        "RES-INT-WEB",
+        "RES-CUST-QUERY",
+        "RES-ACCT-CORE"
+      ],
+      "capability_ids": [
+        "IBMICAP-JAVA-HTTP",
+        "IBMICAP-JOB-PRESTART",
+        "IBMICAP-SEC-AUTH"
+      ],
+      "semantic_case_ids": [],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-INT-0003",
+      "component_ids": [
+        "RES-INT-SOCKET",
+        "RES-TRADE-CORE"
+      ],
+      "capability_ids": [
+        "IBMICAP-C-SOCKET",
+        "IBMICAP-API-USRSPC",
+        "IBMICAP-DTAQ"
+      ],
+      "semantic_case_ids": [],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-SEC-0001",
+      "component_ids": [
+        "RES-SEC-AUTH",
+        "RES-SEC-PRIV"
+      ],
+      "capability_ids": [
+        "IBMICAP-SEC-AUTL",
+        "IBMICAP-SEC-ADOPT",
+        "IBMICAP-CMD"
+      ],
+      "semantic_case_ids": [],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-DEPLOY-0001",
+      "component_ids": [
+        "RES-BATCH-CONTROL",
+        "RES-FOUND-CONFIG"
+      ],
+      "capability_ids": [
+        "IBMICAP-LIBL-RESOLUTION",
+        "IBMICAP-ILE-BIND",
+        "IBMICAP-DTAARA"
+      ],
+      "semantic_case_ids": [],
+      "evidence_refs": []
+    },
+    {
+      "workflow_id": "RES-WF-FAIL-0001",
+      "component_ids": [
+        "RES-BATCH-CONTROL",
+        "RES-OPS-MONITOR"
+      ],
+      "capability_ids": [
+        "IBMICAP-FAILURE-RECOVERY",
+        "IBMICAP-DB-LOCK",
+        "IBMICAP-MSG-INQUIRY"
+      ],
+      "semantic_case_ids": [],
+      "evidence_refs": []
+    }
+  ]
+}

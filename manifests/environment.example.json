@@ -1,0 +1,26 @@
+{
+  "schema_version": "2.0.0",
+  "environment_id": "res-dev-lpar",
+  "kind": "ibmi",
+  "release_id": "IBMI-7.5",
+  "authority": "authoritative_candidate",
+  "workspace": {
+    "library_prefix": "RESLAB",
+    "ifs_root": "/home/reslab/workspaces"
+  },
+  "capability_adapters": {
+    "command": "ssh",
+    "file": "sftp",
+    "sql": "odbc"
+  },
+  "secret_refs": [
+    "RES_IBMI_PASSWORD"
+  ],
+  "limits": {
+    "max_concurrent_jobs": 2,
+    "command_timeout_seconds": 300
+  },
+  "fingerprint": null,
+  "capabilities": [],
+  "security_personas": []
+}

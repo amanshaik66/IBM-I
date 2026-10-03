@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "task_id": "TASK-IBMSEM-RPG-CHAIN-9999",
+  "semantic_id": "IBMSEM-RPG-CHAIN-9999",
+  "objective": "Replace with one observable semantic behavior.",
+  "allowed_directories": [
+    "registry/coverage/IBMSEM-RPG-CHAIN-9999.json",
+    "ibmi/rpgle/customers/",
+    "tests/semantic/"
+  ],
+  "forbidden_changes": [
+    "Existing semantic IDs or meanings",
+    "Registry schemas",
+    "Global architecture",
+    "Unrelated cases"
+  ],
+  "prerequisites": [],
+  "expected_deliverables": [
+    "One registry entry",
+    "Source fixture",
+    "Deterministic test fixture"
+  ],
+  "res_module": "customers",
+  "required_source": [
+    "RPGLE source with UNVERIFIED marker"
+  ],
+  "required_test_fixture": [
+    "Input and observable expectations"
+  ],
+  "required_setup": "Idempotent setup in a leased library.",
+  "required_cleanup": "Idempotent removal/restoration of case-created state.",
+  "required_documentation": [
+    "Concise authoritative references"
+  ],
+  "verification_requirements": [
+    "Offline validation does not prove IBM i behavior",
+    "Authoritative evidence required for IBM i status"
+  ],
+  "completion_criteria": [
+    "res-validate all passes",
+    "Independent review completed"
+  ],
+  "change_scope": "implementation_only",
+  "assigned_role": "implementer",
+  "independent_review": {
+    "required": true,
+    "implementer_may_self_approve": false
+  },
+  "workflow_ids": [
+    "RES-WF-CUST-0002"
+  ],
+  "component_ids": [
+    "RES-CUST-QUERY"
+  ],
+  "capability_ids": [
+    "IBMICAP-RPG-CHAIN"
+  ],
+  "coverage_placement": "business_integrated"
+}

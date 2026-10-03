@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://res.example/schemas/runtime-observation.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "execution_id",
+    "observed_at",
+    "category",
+    "source",
+    "confidence",
+    "payload",
+    "artifact_refs"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "execution_id": {
+      "type": "string"
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "category": {
+      "enum": [
+        "program_call",
+        "object_access",
+        "sql_activity",
+        "job_relationship",
+        "queue_operation",
+        "message_flow",
+        "file_access",
+        "external_communication",
+        "dynamic_dependency"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "mechanism",
+        "environment_id"
+      ],
+      "properties": {
+        "mechanism": {
+          "type": "string"
+        },
+        "environment_id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "confidence": {
+      "enum": [
+        "direct",
+        "inferred",
+        "unknown"
+      ]
+    },
+    "payload": {
+      "type": "object"
+    },
+    "artifact_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+      }
+    }
+  }
+}
