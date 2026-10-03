@@ -1,0 +1,12 @@
+{
+  "schema_version":"1.0.0",
+  "personas":[
+    {"id":"controller-admin","purpose":"Workspace provisioning and evidence collection","credential_ref":"RES_CONTROLLER_ADMIN_SECRET"},
+    {"id":"res-user","purpose":"Normal application execution","credential_ref":"RES_USER_SECRET"},
+    {"id":"res-privileged","purpose":"Explicit privileged application scenarios","credential_ref":"RES_PRIVILEGED_SECRET"},
+    {"id":"res-low-authority","purpose":"Expected authority-failure scenarios","credential_ref":"RES_LOW_AUTHORITY_SECRET"},
+    {"id":"res-group-profile","purpose":"Group-profile authority scenarios","credential_ref":"RES_GROUP_SECRET"},
+    {"id":"res-adopted-authority","purpose":"Adopted-authority scenarios","credential_ref":"RES_ADOPTED_SECRET"}
+  ],
+  "policy":"Only environment-variable or external secret-manager references are stored; credentials are forbidden."
+}

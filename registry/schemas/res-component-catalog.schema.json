@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://res.example/schemas/res-component-catalog.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "estate",
+    "components"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "estate": {
+      "const": "RES"
+    },
+    "components": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "component_id",
+          "domain",
+          "title",
+          "responsibilities",
+          "implementation_generations",
+          "languages",
+          "object_types",
+          "libraries",
+          "interfaces",
+          "depends_on",
+          "status"
+        ],
+        "properties": {
+          "component_id": {
+            "type": "string",
+            "pattern": "^RES-[A-Z]+-[A-Z0-9-]+$"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "responsibilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "implementation_generations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "languages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "object_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "libraries": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "interfaces": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "depends_on": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "enum": [
+              "planned",
+              "foundation_fixture",
+              "implemented"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

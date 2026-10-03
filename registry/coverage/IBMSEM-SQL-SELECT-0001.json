@@ -1,0 +1,127 @@
+{
+  "schema_version": "2.0.0",
+  "semantic_id": "IBMSEM-SQL-SELECT-0001",
+  "title": "Account balance embedded SQL select",
+  "description": "Specifies the observable RES behavior for account balance embedded sql select; exact platform behavior remains unverified.",
+  "taxonomy": {
+    "domain": "sql",
+    "feature": "select",
+    "operation": "read",
+    "variant": "one matching row",
+    "interactions": [
+      "sqlrpgle",
+      "db2_for_i"
+    ]
+  },
+  "applicability": {
+    "release_ids": [
+      "IBMI-7.4",
+      "IBMI-7.5"
+    ],
+    "excluded_configurations": []
+  },
+  "documentation": [],
+  "confidence": "requires_investigation",
+  "requirements": {
+    "languages": [
+      "SQLRPGLE",
+      "SQL"
+    ],
+    "objects": [
+      "*PGM",
+      "*FILE"
+    ],
+    "infrastructure": [
+      "registered IBM i development LPAR"
+    ],
+    "configuration": [
+      "job CCSID and compiler/PTF levels captured"
+    ]
+  },
+  "prerequisites": [],
+  "res_module": "accounts",
+  "fixtures": {
+    "source": [
+      "ibmi/rpgle/accounts/ACCTSEL.sqlrpgle",
+      "ibmi/sql/accounts/ACCT.sql"
+    ],
+    "setup": null,
+    "test_input": null
+  },
+  "expectations": {
+    "output": null,
+    "database_state": null,
+    "messages": [],
+    "job_state": null,
+    "queue_state": null,
+    "spool_state": null,
+    "filesystem_state": null,
+    "error_behavior": null
+  },
+  "cleanup": {
+    "procedure": "Delete objects from the leased test library and restore fixture state.",
+    "idempotent": true
+  },
+  "concurrency": {
+    "mode": "isolated",
+    "max_parallel": 1
+  },
+  "external_dependencies": [],
+  "notes": [
+    "UNVERIFIED ON IBM i.",
+    "Expected observations must be completed from IBM documentation and LPAR experiments before behavior verification."
+  ],
+  "implementation_status": "source_written",
+  "verification_status": "requires_investigation",
+  "evidence_refs": [],
+  "lifecycle": {
+    "semantic_definition_version": "1.0.0",
+    "created_at": "2026-10-03T00:00:00Z",
+    "modified_at": "2026-10-03T00:00:00Z",
+    "supersedes": [],
+    "superseded_by": [],
+    "deprecated": false,
+    "change_rationale": "Initial foundation definition; IBM i semantics remain unverified."
+  },
+  "case_kind": "single_feature",
+  "component_semantic_ids": [],
+  "negative_dimensions": [],
+  "required_capabilities": [
+    {
+      "id": "compiler.sqlrpgle",
+      "minimum_version": null,
+      "required_configuration": []
+    }
+  ],
+  "isolation": {
+    "dimensions": [
+      "library",
+      "job",
+      "qtemp",
+      "library_list",
+      "filesystem_path"
+    ],
+    "exclusive_resources": []
+  },
+  "phases": {
+    "precondition_validation": "Confirm required capabilities and prerequisite fixtures are available.",
+    "setup": "Create deterministic fixtures in the leased namespace.",
+    "execution": "Execute only the operation defined by this semantic case.",
+    "observation": "Capture declared observable state and artifact references.",
+    "cleanup": "Remove or reset all resources created by setup or execution.",
+    "cleanup_verification": "Verify the leased namespace contains no case-owned orphan resources."
+  },
+  "mutable_resources": [
+    {
+      "kind": "ibmi_object",
+      "identifier_template": "{leased_library}/*",
+      "orphan_detection": "Inventory the leased library and compare with its pre-run snapshot."
+    }
+  ],
+  "comparison_policy_ref": "registry/policies/default-exact-v1.json",
+  "expectation_governance": {
+    "change_class": "initial_definition",
+    "evidence_required": false,
+    "independent_review_required": true
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://res.example/schemas/dependency-graph.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "graph_id",
+    "nodes",
+    "edges"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "graph_id": {
+      "type": "string"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "resolved"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "resolved": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "from",
+          "to",
+          "type",
+          "discovery",
+          "confidence",
+          "evidence_ref",
+          "dynamic",
+          "notes"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "type": {
+            "enum": [
+              "program_call",
+              "procedure_call",
+              "ile_binding",
+              "database",
+              "dds",
+              "logical_to_physical",
+              "trigger",
+              "job_submission",
+              "data_queue",
+              "message_queue",
+              "file",
+              "journal",
+              "library_list_resolution",
+              "dynamic_call",
+              "dynamic_object_name",
+              "external_integration",
+              "unknown"
+            ]
+          },
+          "discovery": {
+            "enum": [
+              "declared",
+              "static",
+              "runtime"
+            ]
+          },
+          "confidence": {
+            "enum": [
+              "confirmed",
+              "probable",
+              "unknown"
+            ]
+          },
+          "evidence_ref": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dynamic": {
+            "type": "boolean"
+          },
+          "notes": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "completeness",
+    "capabilities"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "completeness": {
+      "const": "partial_seed_taxonomy"
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "capability_id",
+          "title",
+          "category",
+          "scope_status"
+        ],
+        "properties": {
+          "capability_id": {
+            "type": "string",
+            "pattern": "^IBMICAP-[A-Z0-9-]+$"
+          },
+          "title": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "scope_status": {
+            "enum": [
+              "candidate",
+              "in_scope",
+              "deferred",
+              "unsupported"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "schema_version": "2.0.0",
+  "environment_id": "res-mock-local",
+  "kind": "mock",
+  "release_id": null,
+  "authority": "non_authoritative",
+  "workspace": {
+    "library_prefix": "RESMCK",
+    "ifs_root": "/tmp/res-mock"
+  },
+  "capability_adapters": {
+    "command": "mock",
+    "file": "mock",
+    "sql": "mock"
+  },
+  "secret_refs": [],
+  "limits": {
+    "max_concurrent_jobs": 1,
+    "command_timeout_seconds": 10
+  },
+  "fingerprint": null,
+  "capabilities": [
+    {
+      "id": "controller.mock",
+      "status": "available",
+      "version": "1.0.0",
+      "attributes": {
+        "authoritative": false
+      },
+      "configuration_required": []
+    }
+  ],
+  "security_personas": []
+}

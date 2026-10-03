@@ -1,0 +1,129 @@
+{
+  "schema_version": "1.0.0",
+  "manifest_id": "RES-CUSTOMER-LOOKUP",
+  "manifest_version": "1.0.0",
+  "semantic_case_ids": [
+    "IBMSEM-DDS-PF-0001",
+    "IBMSEM-RPG-CHAIN-0001",
+    "IBMSEM-RPG-CHAIN-0002"
+  ],
+  "nodes": [
+    {
+      "node_id": "customer-file",
+      "source": {
+        "path": "ibmi/dds/customers/CUSTPF.pf",
+        "member": null
+      },
+      "source_kind": "stream_file",
+      "object": {
+        "name": "CUSTPF",
+        "type": "*FILE"
+      },
+      "target_library": "{leased_library}",
+      "compile": {
+        "command": "CRTPF",
+        "parameters": {},
+        "target_release": null,
+        "activation_group_options": {},
+        "debug_view": null,
+        "commitment_options": {},
+        "binding_directories": [],
+        "binder_source": null,
+        "library_list": [
+          "{leased_library}"
+        ],
+        "compiler_options": {}
+      },
+      "prerequisite_nodes": [],
+      "order_hint": 10,
+      "generated_objects": [
+        {
+          "name": "CUSTPF",
+          "type": "*FILE"
+        }
+      ],
+      "authority_expectations": {
+        "owner": "{test_profile}"
+      },
+      "environment_requirements": [
+        "compiler.dds"
+      ],
+      "known_interfaces": []
+    },
+    {
+      "node_id": "customer-lookup",
+      "source": {
+        "path": "ibmi/rpgle/customers/CUSTLOOK.rpgle",
+        "member": null
+      },
+      "source_kind": "stream_file",
+      "object": {
+        "name": "CUSTLOOK",
+        "type": "*PGM"
+      },
+      "target_library": "{leased_library}",
+      "compile": {
+        "command": "CRTBNDRPG",
+        "parameters": {},
+        "target_release": null,
+        "activation_group_options": {},
+        "debug_view": "*SOURCE",
+        "commitment_options": {},
+        "binding_directories": [],
+        "binder_source": null,
+        "library_list": [
+          "{leased_library}"
+        ],
+        "compiler_options": {}
+      },
+      "prerequisite_nodes": [
+        "customer-file"
+      ],
+      "order_hint": 20,
+      "generated_objects": [
+        {
+          "name": "CUSTLOOK",
+          "type": "*PGM"
+        }
+      ],
+      "authority_expectations": {
+        "owner": "{test_profile}"
+      },
+      "environment_requirements": [
+        "compiler.rpgle"
+      ],
+      "known_interfaces": []
+    },
+    {
+      "node_id": "vendor-service",
+      "source": null,
+      "source_kind": "vendor_black_box",
+      "object": {
+        "name": "VENDORAPI",
+        "type": "*SRVPGM"
+      },
+      "target_library": "{configured_vendor_library}",
+      "compile": null,
+      "prerequisite_nodes": [],
+      "order_hint": 0,
+      "generated_objects": [],
+      "authority_expectations": {
+        "ownership": "vendor_managed"
+      },
+      "environment_requirements": [
+        "vendor.api.optional"
+      ],
+      "known_interfaces": [
+        {
+          "procedure": "LOOKUP",
+          "observation_only": true
+        }
+      ]
+    }
+  ],
+  "cleanup": {
+    "instructions": "Delete case-created objects only from the leased library.",
+    "verification": "Compare post-cleanup inventory with the pre-run snapshot.",
+    "orphan_detection": "Flag build node object identities remaining in expired leases."
+  }
+}

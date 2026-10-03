@@ -1,0 +1,1160 @@
+{
+  "schema_version": "1.0.0",
+  "taxonomy_ref": "registry/capabilities/taxonomy.json",
+  "allocations": [
+    {
+      "capability_id": "IBMICAP-RPG-CHAIN",
+      "placement": "business_integrated",
+      "rationale": "CHAIN keyed access has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-CUST-0002",
+        "RES-WF-ACCT-0001"
+      ],
+      "component_ids": [
+        "RES-CUST-QUERY",
+        "RES-ACCT-CORE"
+      ],
+      "primary_languages": [
+        "RPGLE"
+      ],
+      "object_types": [
+        "*FILE"
+      ],
+      "semantic_families": [
+        "chain-hit-miss",
+        "chain-lock-override-member-commit-concurrency"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-RPG-CHAIN-0001",
+        "IBMSEM-RPG-CHAIN-0002"
+      ],
+      "interaction_targets": [
+        "IBMICAP-LIBL-RESOLUTION",
+        "IBMICAP-DB-MEMBER",
+        "IBMICAP-DB-COMMIT",
+        "IBMICAP-DB-LOCK"
+      ],
+      "allocation_status": "partially_implemented"
+    },
+    {
+      "capability_id": "IBMICAP-RPG-SETLL",
+      "placement": "business_integrated",
+      "rationale": "SETLL positioning has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-CUST-0002"
+      ],
+      "component_ids": [
+        "RES-CUST-QUERY",
+        "RES-UI-SERVICE"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "rpg-setll-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-RPG-READE",
+      "placement": "business_integrated",
+      "rationale": "READE equal-key iteration has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-CUST-0002"
+      ],
+      "component_ids": [
+        "RES-CUST-QUERY",
+        "RES-UI-SERVICE"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "rpg-reade-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-RPG-READP",
+      "placement": "business_integrated",
+      "rationale": "Reverse keyed reads has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-ACCT-0001"
+      ],
+      "component_ids": [
+        "RES-ACCT-CORE",
+        "RES-ACCT-TXN",
+        "RES-UI-SERVICE"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "rpg-readp-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-RPG-WRITE",
+      "placement": "business_integrated",
+      "rationale": "Native record WRITE has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-PAY-0001"
+      ],
+      "component_ids": [
+        "RES-ACCT-TXN"
+      ],
+      "primary_languages": [
+        "RPGLE"
+      ],
+      "object_types": [
+        "*FILE"
+      ],
+      "semantic_families": [
+        "native-write-success-duplicate-commit"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-RPG-WRITE-0001"
+      ],
+      "interaction_targets": [],
+      "allocation_status": "partially_implemented"
+    },
+    {
+      "capability_id": "IBMICAP-RPG-UPDATE",
+      "placement": "business_integrated",
+      "rationale": "Native record UPDATE has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-PAY-0002"
+      ],
+      "component_ids": [
+        "RES-ACCT-TXN",
+        "RES-PAY-POST"
+      ],
+      "primary_languages": [
+        "RPGLE"
+      ],
+      "object_types": [
+        "*FILE"
+      ],
+      "semantic_families": [
+        "native-update-lock-missing-rollback"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-RPG-UPDATE-0001"
+      ],
+      "interaction_targets": [],
+      "allocation_status": "partially_implemented"
+    },
+    {
+      "capability_id": "IBMICAP-RPG-DELETE",
+      "placement": "semantic_edge",
+      "rationale": "Native record DELETE has a deliberate semantic edge home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [],
+      "component_ids": [
+        "RES-OPS-MONITOR"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "rpg-delete-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-DDS-PF",
+      "placement": "business_integrated",
+      "rationale": "DDS physical files has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-CUST-0001"
+      ],
+      "component_ids": [
+        "RES-CUST-MASTER",
+        "RES-GL-LEGACY"
+      ],
+      "primary_languages": [
+        "DDS"
+      ],
+      "object_types": [
+        "*FILE"
+      ],
+      "semantic_families": [
+        "dds-pf-create-record-format-key-member"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-DDS-PF-0001"
+      ],
+      "interaction_targets": [],
+      "allocation_status": "partially_implemented"
+    },
+    {
+      "capability_id": "IBMICAP-DDS-LF",
+      "placement": "business_integrated",
+      "rationale": "DDS logical/access paths has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-CUST-0002"
+      ],
+      "component_ids": [
+        "RES-CUST-QUERY",
+        "RES-GL-LEGACY"
+      ],
+      "primary_languages": [
+        "DDS"
+      ],
+      "object_types": [
+        "*FILE"
+      ],
+      "semantic_families": [
+        "dds-lf-access-path-selection-join"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-DDS-LF-0001"
+      ],
+      "interaction_targets": [],
+      "allocation_status": "partially_implemented"
+    },
+    {
+      "capability_id": "IBMICAP-DB-MEMBER",
+      "placement": "business_integrated",
+      "rationale": "Database members and aliases has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-PAY-0003",
+        "RES-WF-DOC-0001"
+      ],
+      "component_ids": [
+        "RES-PAY-RECON",
+        "RES-DOC-INTAKE",
+        "RES-INT-GATEWAY"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "db-member-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-DB-COMMIT",
+      "placement": "business_integrated",
+      "rationale": "Commitment control has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-CUST-0001",
+        "RES-WF-PAY-0001",
+        "RES-WF-PAY-0002",
+        "RES-WF-INT-0001"
+      ],
+      "component_ids": [
+        "RES-CUST-MASTER",
+        "RES-ACCT-CORE",
+        "RES-PAY-ENTRY",
+        "RES-PAY-POST",
+        "RES-ACCT-TXN",
+        "RES-GL-GATEWAY",
+        "RES-INT-GATEWAY"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "db-commit-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-DB-JOURNAL",
+      "placement": "business_integrated",
+      "rationale": "Journaling and receivers has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-PAY-0001",
+        "RES-WF-GL-0001"
+      ],
+      "component_ids": [
+        "RES-PAY-ENTRY",
+        "RES-PAY-POST",
+        "RES-ACCT-TXN",
+        "RES-GL-GATEWAY",
+        "RES-GL-LEGACY"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "db-journal-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-DB-LOCK",
+      "placement": "business_integrated",
+      "rationale": "Record/object locking has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-ORD-0001",
+        "RES-WF-FAIL-0001"
+      ],
+      "component_ids": [
+        "RES-ORD-CORE",
+        "RES-INV-CORE",
+        "RES-BILL-INVOICE",
+        "RES-BATCH-CONTROL",
+        "RES-OPS-MONITOR"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "db-lock-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-DB-CONSTRAINT",
+      "placement": "business_integrated",
+      "rationale": "SQL constraints and triggers has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-ORD-0001"
+      ],
+      "component_ids": [
+        "RES-ORD-CORE",
+        "RES-INV-CORE",
+        "RES-BILL-INVOICE"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "db-constraint-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-DB-DECIMAL",
+      "placement": "business_integrated",
+      "rationale": "Decimal/null/date/CCSID semantics has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-BILL-0001",
+        "RES-WF-TRD-0001"
+      ],
+      "component_ids": [
+        "RES-BILL-INVOICE",
+        "RES-BILL-COLLECT",
+        "RES-TRADE-CORE",
+        "RES-TRADE-SETTLE",
+        "RES-GL-GATEWAY"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "db-decimal-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-SQL-EMBEDDED",
+      "placement": "business_integrated",
+      "rationale": "Embedded SQL and cursors has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-ACCT-0001",
+        "RES-WF-PAY-0001"
+      ],
+      "component_ids": [
+        "RES-PAY-POST",
+        "RES-ACCT-TXN"
+      ],
+      "primary_languages": [
+        "SQLRPGLE"
+      ],
+      "object_types": [
+        "*PGM",
+        "*FILE"
+      ],
+      "semantic_families": [
+        "embedded-select-cursor-null-error"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-SQL-SELECT-0001"
+      ],
+      "interaction_targets": [],
+      "allocation_status": "partially_implemented"
+    },
+    {
+      "capability_id": "IBMICAP-SQL-PROCEDURE",
+      "placement": "business_integrated",
+      "rationale": "SQL routines and dynamic SQL has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-BILL-0001"
+      ],
+      "component_ids": [
+        "RES-BILL-INVOICE",
+        "RES-BILL-COLLECT"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "sql-procedure-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-ILE-SRVPGM",
+      "placement": "business_integrated",
+      "rationale": "ILE service programs/modules has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-CUST-0001"
+      ],
+      "component_ids": [
+        "RES-FOUND-COMMON",
+        "RES-GL-GATEWAY"
+      ],
+      "primary_languages": [
+        "RPGLE"
+      ],
+      "object_types": [
+        "*SRVPGM",
+        "*MODULE"
+      ],
+      "semantic_families": [
+        "ile-service-export-import-activation"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-RPG-PROGRAM-0001"
+      ],
+      "interaction_targets": [],
+      "allocation_status": "partially_implemented"
+    },
+    {
+      "capability_id": "IBMICAP-ILE-BIND",
+      "placement": "business_integrated",
+      "rationale": "Binding directories/signatures has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-GL-0001",
+        "RES-WF-DEPLOY-0001"
+      ],
+      "component_ids": [
+        "RES-GL-GATEWAY",
+        "RES-GL-LEGACY",
+        "RES-BATCH-CONTROL",
+        "RES-FOUND-CONFIG"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "ile-bind-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-PGM-CALL",
+      "placement": "business_integrated",
+      "rationale": "Program and dynamic calls has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-GL-0001"
+      ],
+      "component_ids": [
+        "RES-GL-GATEWAY",
+        "RES-GL-LEGACY"
+      ],
+      "primary_languages": [
+        "CLLE",
+        "RPGLE"
+      ],
+      "object_types": [
+        "*PGM"
+      ],
+      "semantic_families": [
+        "program-call-parameters-messages-dynamic"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-CL-CALL-0001"
+      ],
+      "interaction_targets": [],
+      "allocation_status": "partially_implemented"
+    },
+    {
+      "capability_id": "IBMICAP-CLLE",
+      "placement": "operations_integrated",
+      "rationale": "CL/CLLE orchestration has a deliberate operations integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-OPS-0002"
+      ],
+      "component_ids": [
+        "RES-BATCH-CONTROL"
+      ],
+      "primary_languages": [
+        "CLLE"
+      ],
+      "object_types": [
+        "*PGM"
+      ],
+      "semantic_families": [
+        "cl-program-command-message"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-CL-PROGRAM-0001"
+      ],
+      "interaction_targets": [],
+      "allocation_status": "partially_implemented"
+    },
+    {
+      "capability_id": "IBMICAP-COBOL-BATCH",
+      "placement": "business_integrated",
+      "rationale": "COBOL and SQL COBOL batch has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-PAY-0003",
+        "RES-WF-INV-0001",
+        "RES-WF-GL-0001",
+        "RES-WF-TRD-0001"
+      ],
+      "component_ids": [
+        "RES-PAY-RECON",
+        "RES-DOC-INTAKE",
+        "RES-INV-REPLEN",
+        "RES-INV-CORE",
+        "RES-GL-GATEWAY",
+        "RES-GL-LEGACY",
+        "RES-TRADE-CORE",
+        "RES-TRADE-SETTLE"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "cobol-batch-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-C-SOCKET",
+      "placement": "business_integrated",
+      "rationale": "ILE C/C++ sockets and APIs has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-INT-0003"
+      ],
+      "component_ids": [
+        "RES-INT-SOCKET",
+        "RES-TRADE-CORE"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "c-socket-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-JAVA-HTTP",
+      "placement": "business_integrated",
+      "rationale": "Java HTTP/SOAP/JDBC has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-INT-0002"
+      ],
+      "component_ids": [
+        "RES-INT-WEB",
+        "RES-CUST-QUERY",
+        "RES-ACCT-CORE"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "java-http-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-QSH-PASE",
+      "placement": "business_integrated",
+      "rationale": "QShell and PASE processing has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-DOC-0001"
+      ],
+      "component_ids": [
+        "RES-DOC-INTAKE",
+        "RES-INT-GATEWAY"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "qsh-pase-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-REXX-OPS",
+      "placement": "operations_integrated",
+      "rationale": "REXX operator diagnostics has a deliberate semantic edge home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-OPS-0002"
+      ],
+      "component_ids": [
+        "RES-OPS-MONITOR"
+      ],
+      "primary_languages": [
+        "REXX"
+      ],
+      "object_types": [
+        "*PGM"
+      ],
+      "semantic_families": [
+        "rexx-ops-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-JOB-SBMJOB",
+      "placement": "operations_integrated",
+      "rationale": "Submitted jobs and scheduling has a deliberate operations integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-INV-0001",
+        "RES-WF-GL-0002",
+        "RES-WF-EOD-0001"
+      ],
+      "component_ids": [
+        "RES-INV-REPLEN",
+        "RES-INV-CORE",
+        "RES-GL-CLOSE",
+        "RES-BATCH-CONTROL",
+        "RES-RPT-ENGINE",
+        "RES-BATCH-EOD"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "job-sbmjob-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [
+        "IBMICAP-JOB-SBSD",
+        "IBMICAP-MSG-INQUIRY",
+        "IBMICAP-SPOOL-OUTQ",
+        "IBMICAP-FAILURE-RECOVERY"
+      ],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-JOB-SBSD",
+      "placement": "operations_integrated",
+      "rationale": "Subsystem/JOBQ/JOBD/routing has a deliberate operations integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-EOD-0001"
+      ],
+      "component_ids": [
+        "RES-BATCH-EOD",
+        "RES-BATCH-CONTROL",
+        "RES-GL-CLOSE",
+        "RES-RPT-ENGINE"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "job-sbsd-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-JOB-PRESTART",
+      "placement": "operations_integrated",
+      "rationale": "Prestart/autostart workers has a deliberate operations integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-INT-0002"
+      ],
+      "component_ids": [
+        "RES-INT-WEB",
+        "RES-CUST-QUERY",
+        "RES-ACCT-CORE"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "job-prestart-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-JOB-STATUS",
+      "placement": "operations_integrated",
+      "rationale": "Job states/logs/priorities has a deliberate operations integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-OPS-0002"
+      ],
+      "component_ids": [
+        "RES-OPS-MONITOR",
+        "RES-BATCH-CONTROL"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "job-status-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-MSG-INQUIRY",
+      "placement": "operations_integrated",
+      "rationale": "Inquiry/reply/MSGW has a deliberate operations integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-GL-0002",
+        "RES-WF-EOD-0001",
+        "RES-WF-OPS-0001",
+        "RES-WF-FAIL-0001"
+      ],
+      "component_ids": [
+        "RES-GL-CLOSE",
+        "RES-BATCH-CONTROL",
+        "RES-RPT-ENGINE",
+        "RES-BATCH-EOD",
+        "RES-OPS-MESSAGES",
+        "RES-UI-OPS",
+        "RES-OPS-MONITOR"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "msg-inquiry-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-MSG-ESCAPE",
+      "placement": "operations_integrated",
+      "rationale": "Program diagnostic/escape/completion has a deliberate operations integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-PAY-0002"
+      ],
+      "component_ids": [
+        "RES-PAY-POST",
+        "RES-ACCT-TXN",
+        "RES-GL-GATEWAY"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "msg-escape-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-DTAQ",
+      "placement": "business_integrated",
+      "rationale": "Data queue asynchronous work has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-PAY-0001",
+        "RES-WF-ORD-0001",
+        "RES-WF-TRD-0001",
+        "RES-WF-INT-0001",
+        "RES-WF-INT-0003"
+      ],
+      "component_ids": [
+        "RES-PAY-ENTRY",
+        "RES-PAY-POST",
+        "RES-ACCT-TXN",
+        "RES-GL-GATEWAY",
+        "RES-ORD-CORE",
+        "RES-INV-CORE",
+        "RES-BILL-INVOICE",
+        "RES-TRADE-CORE",
+        "RES-TRADE-SETTLE",
+        "RES-INT-GATEWAY",
+        "RES-INT-SOCKET"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "dtaq-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-DTAARA",
+      "placement": "business_integrated",
+      "rationale": "Data area configuration/control has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-EOD-0001",
+        "RES-WF-DEPLOY-0001"
+      ],
+      "component_ids": [
+        "RES-BATCH-EOD",
+        "RES-BATCH-CONTROL",
+        "RES-GL-CLOSE",
+        "RES-RPT-ENGINE",
+        "RES-FOUND-CONFIG"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "dtaara-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-5250-DSPF",
+      "placement": "business_integrated",
+      "rationale": "Display files/indicators/messages has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-OPS-0001"
+      ],
+      "component_ids": [
+        "RES-OPS-MESSAGES",
+        "RES-UI-OPS"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "5250-dspf-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [
+        "IBMICAP-5250-SUBFILE",
+        "IBMICAP-ILE-SRVPGM",
+        "IBMICAP-SEC-AUTH",
+        "IBMICAP-MSG-ESCAPE"
+      ],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-5250-SUBFILE",
+      "placement": "business_integrated",
+      "rationale": "Subfiles and pagination has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-CUST-0002",
+        "RES-WF-ACCT-0001"
+      ],
+      "component_ids": [
+        "RES-CUST-QUERY",
+        "RES-UI-SERVICE",
+        "RES-ACCT-CORE",
+        "RES-ACCT-TXN"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "5250-subfile-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-SPOOL-PRTF",
+      "placement": "business_integrated",
+      "rationale": "Printer files and spool has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-INV-0001",
+        "RES-WF-BILL-0001",
+        "RES-WF-RPT-0001"
+      ],
+      "component_ids": [
+        "RES-INV-REPLEN",
+        "RES-INV-CORE",
+        "RES-BILL-INVOICE",
+        "RES-BILL-COLLECT",
+        "RES-RPT-ENGINE",
+        "RES-RPT-ROUTER",
+        "RES-DOC-EXPORT"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "spool-prtf-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-SPOOL-OUTQ",
+      "placement": "business_integrated",
+      "rationale": "Output queue routing/control has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-GL-0002",
+        "RES-WF-EOD-0001",
+        "RES-WF-RPT-0001"
+      ],
+      "component_ids": [
+        "RES-GL-CLOSE",
+        "RES-BATCH-CONTROL",
+        "RES-RPT-ENGINE",
+        "RES-BATCH-EOD",
+        "RES-RPT-ROUTER",
+        "RES-DOC-EXPORT"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "spool-outq-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-IFS-STREAM",
+      "placement": "business_integrated",
+      "rationale": "IFS stream and archive files has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-PAY-0003",
+        "RES-WF-RPT-0001"
+      ],
+      "component_ids": [
+        "RES-PAY-RECON",
+        "RES-DOC-INTAKE",
+        "RES-RPT-ENGINE",
+        "RES-RPT-ROUTER",
+        "RES-DOC-EXPORT"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "ifs-stream-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-IFS-CCSID",
+      "placement": "business_integrated",
+      "rationale": "IFS authority and CCSID conversion has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-DOC-0001"
+      ],
+      "component_ids": [
+        "RES-DOC-INTAKE",
+        "RES-INT-GATEWAY"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "ifs-ccsid-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-SEC-AUTH",
+      "placement": "business_integrated",
+      "rationale": "Profiles/groups/object and file authority has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-CUST-0001",
+        "RES-WF-INT-0002"
+      ],
+      "component_ids": [
+        "RES-CUST-MASTER",
+        "RES-ACCT-CORE",
+        "RES-INT-WEB",
+        "RES-CUST-QUERY"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "sec-auth-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-SEC-AUTL",
+      "placement": "business_integrated",
+      "rationale": "Authorization lists has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-SEC-0001"
+      ],
+      "component_ids": [
+        "RES-SEC-AUTH",
+        "RES-SEC-PRIV"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "sec-autl-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-SEC-ADOPT",
+      "placement": "business_integrated",
+      "rationale": "Adopted authority has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-SEC-0001"
+      ],
+      "component_ids": [
+        "RES-SEC-AUTH",
+        "RES-SEC-PRIV"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "sec-adopt-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-CMD",
+      "placement": "business_integrated",
+      "rationale": "Commands and command processing has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-SEC-0001"
+      ],
+      "component_ids": [
+        "RES-SEC-AUTH",
+        "RES-SEC-PRIV"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "cmd-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-API-USRSPC",
+      "placement": "operations_integrated",
+      "rationale": "System APIs and user spaces has a deliberate operations integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-OPS-0002",
+        "RES-WF-INT-0003"
+      ],
+      "component_ids": [
+        "RES-OPS-MONITOR",
+        "RES-BATCH-CONTROL",
+        "RES-INT-SOCKET",
+        "RES-TRADE-CORE"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "api-usrspc-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-INTEG-MQ",
+      "placement": "business_integrated",
+      "rationale": "IBM MQ contract integration has a deliberate business integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-INT-0001"
+      ],
+      "component_ids": [
+        "RES-INT-GATEWAY",
+        "RES-PAY-POST"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "integ-mq-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-LIBL-RESOLUTION",
+      "placement": "operations_integrated",
+      "rationale": "Library lists/overrides/object resolution has a deliberate operations integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-DEPLOY-0001"
+      ],
+      "component_ids": [
+        "RES-BATCH-CONTROL",
+        "RES-FOUND-CONFIG"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "libl-resolution-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-FAILURE-RECOVERY",
+      "placement": "operations_integrated",
+      "rationale": "Failure, restart and orphan cleanup has a deliberate operations integrated home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [
+        "RES-WF-FAIL-0001"
+      ],
+      "component_ids": [
+        "RES-BATCH-CONTROL",
+        "RES-OPS-MONITOR"
+      ],
+      "primary_languages": [],
+      "object_types": [],
+      "semantic_families": [
+        "failure-recovery-behavior-family"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    },
+    {
+      "capability_id": "IBMICAP-USRIDX-QUEUE",
+      "placement": "semantic_edge",
+      "rationale": "User index/user queue facilities has a deliberate semantic edge home in RES; exact behavior remains subject to semantic cases and IBM i evidence.",
+      "workflow_ids": [],
+      "component_ids": [
+        "RES-OPS-MONITOR"
+      ],
+      "primary_languages": [
+        "C"
+      ],
+      "object_types": [
+        "*USRIDX",
+        "*USRQ"
+      ],
+      "semantic_families": [
+        "user-index-queue-api-lifecycle"
+      ],
+      "semantic_case_ids": [],
+      "interaction_targets": [],
+      "allocation_status": "planned"
+    }
+  ]
+}

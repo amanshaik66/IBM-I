@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "graph_id": "res-starter-v1",
+  "nodes": [
+    {
+      "id": "object:CUSTPF",
+      "kind": "file",
+      "resolved": true
+    },
+    {
+      "id": "program:CUSTLOOK",
+      "kind": "program",
+      "resolved": true
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-0001",
+      "from": "program:CUSTLOOK",
+      "to": "object:CUSTPF",
+      "type": "file",
+      "discovery": "declared",
+      "confidence": "probable",
+      "evidence_ref": null,
+      "dynamic": false,
+      "notes": "Declared from the unverified source fixture; runtime confirmation pending."
+    }
+  ]
+}

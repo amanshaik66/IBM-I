@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "semantic_links",
+    "workflow_links"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "semantic_links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "semantic_id",
+          "capability_ids",
+          "component_ids",
+          "workflow_ids"
+        ],
+        "properties": {
+          "semantic_id": {
+            "type": "string"
+          },
+          "capability_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "component_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "workflow_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "workflow_links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "workflow_id",
+          "component_ids",
+          "capability_ids",
+          "semantic_case_ids",
+          "evidence_refs"
+        ],
+        "properties": {
+          "workflow_id": {
+            "type": "string"
+          },
+          "component_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "capability_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "semantic_case_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

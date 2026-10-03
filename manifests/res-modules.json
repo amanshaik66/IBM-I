@@ -1,0 +1,127 @@
+{
+  "schema_version": "1.0.0",
+  "estate": "RES",
+  "modules": [
+    {
+      "id": "common",
+      "name": "Common/Foundation",
+      "depends_on": []
+    },
+    {
+      "id": "customers",
+      "name": "Customers",
+      "depends_on": [
+        "common"
+      ]
+    },
+    {
+      "id": "accounts",
+      "name": "Accounts",
+      "depends_on": [
+        "common",
+        "customers"
+      ]
+    },
+    {
+      "id": "orders",
+      "name": "Orders",
+      "depends_on": [
+        "common",
+        "customers",
+        "accounts"
+      ]
+    },
+    {
+      "id": "payments",
+      "name": "Payments",
+      "depends_on": [
+        "common",
+        "customers",
+        "accounts"
+      ]
+    },
+    {
+      "id": "accounting",
+      "name": "Accounting",
+      "depends_on": [
+        "common",
+        "accounts",
+        "payments"
+      ]
+    },
+    {
+      "id": "reporting",
+      "name": "Reporting",
+      "depends_on": [
+        "common",
+        "customers",
+        "accounts",
+        "accounting"
+      ]
+    },
+    {
+      "id": "operations",
+      "name": "Operations",
+      "depends_on": [
+        "common"
+      ]
+    },
+    {
+      "id": "inventory",
+      "name": "Inventory",
+      "depends_on": [
+        "common",
+        "orders"
+      ]
+    },
+    {
+      "id": "billing",
+      "name": "Billing",
+      "depends_on": [
+        "common",
+        "orders",
+        "payments"
+      ]
+    },
+    {
+      "id": "trading",
+      "name": "Trading",
+      "depends_on": [
+        "common",
+        "customers",
+        "accounting"
+      ]
+    },
+    {
+      "id": "batch",
+      "name": "Batch",
+      "depends_on": [
+        "common",
+        "operations"
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security Administration",
+      "depends_on": [
+        "common"
+      ]
+    },
+    {
+      "id": "documents",
+      "name": "Document Processing",
+      "depends_on": [
+        "common",
+        "operations"
+      ]
+    },
+    {
+      "id": "integration",
+      "name": "Integration",
+      "depends_on": [
+        "common",
+        "operations"
+      ]
+    }
+  ]
+}

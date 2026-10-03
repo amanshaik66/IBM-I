@@ -1,0 +1,4 @@
+/* UNVERIFIED ON IBM i - foundation fixture IBMSEM-CL-CALL-0001 */
+PGM
+  CALL PGM(HELLO)
+ENDPGM

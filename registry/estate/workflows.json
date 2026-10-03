@@ -1,0 +1,1586 @@
+{
+  "schema_version": "1.0.0",
+  "estate": "RES",
+  "workflows": [
+    {
+      "workflow_id": "RES-WF-CUST-0001",
+      "title": "Onboard customer and account",
+      "business_purpose": "Establish an identified customer and usable account",
+      "initiating_actor": "customer service user",
+      "inputs": [
+        "customer identity",
+        "address",
+        "account product"
+      ],
+      "modules": [
+        "customer",
+        "accounts",
+        "foundation"
+      ],
+      "components": [
+        "RES-CUST-MASTER",
+        "RES-ACCT-CORE"
+      ],
+      "database_entities": [
+        "CUSTOMER",
+        "ADDRESS",
+        "ACCOUNT",
+        "AUDIT_EVENT"
+      ],
+      "ibmi_objects": [
+        "CUSTPF",
+        "ACCTPF",
+        "RESMSGF"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-DB-COMMIT",
+        "IBMICAP-ILE-SRVPGM",
+        "IBMICAP-SEC-AUTH",
+        "IBMICAP-DDS-PF"
+      ],
+      "synchronous_interactions": [
+        "customer validation",
+        "account service call"
+      ],
+      "asynchronous_interactions": [
+        "transactional outbox"
+      ],
+      "external_dependencies": [],
+      "expected_outputs": [
+        "customer ID",
+        "account ID",
+        "audit event"
+      ],
+      "transactional_boundaries": [
+        "customer/address/account/audit commit together"
+      ],
+      "security_context": [
+        "customer-service role"
+      ],
+      "failure_paths": [
+        "duplicate customer",
+        "constraint failure",
+        "authority denial"
+      ],
+      "recovery_path": [
+        "rollback; correct and resubmit"
+      ],
+      "execution_class": "interactive",
+      "future_semantic_families": [
+        "commit-rollback",
+        "service-program-call",
+        "authority"
+      ],
+      "semantic_case_ids": [],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-CUST-0002",
+      "title": "Search and inspect customer",
+      "business_purpose": "Find a customer through keyed and alternate criteria",
+      "initiating_actor": "customer service user",
+      "inputs": [
+        "customer key or search terms"
+      ],
+      "modules": [
+        "customer"
+      ],
+      "components": [
+        "RES-CUST-QUERY",
+        "RES-UI-SERVICE"
+      ],
+      "database_entities": [
+        "CUSTOMER",
+        "ADDRESS",
+        "CUSTOMER_HISTORY"
+      ],
+      "ibmi_objects": [
+        "CUSTPF",
+        "CUSTL1",
+        "DSPF"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-RPG-CHAIN",
+        "IBMICAP-RPG-SETLL",
+        "IBMICAP-RPG-READE",
+        "IBMICAP-DDS-LF",
+        "IBMICAP-5250-SUBFILE"
+      ],
+      "synchronous_interactions": [
+        "5250 to query service"
+      ],
+      "asynchronous_interactions": [],
+      "external_dependencies": [],
+      "expected_outputs": [
+        "paged customer results",
+        "not-found result"
+      ],
+      "transactional_boundaries": [
+        "read-only"
+      ],
+      "security_context": [
+        "customer-service role"
+      ],
+      "failure_paths": [
+        "missing key",
+        "bad library list",
+        "record lock interaction"
+      ],
+      "recovery_path": [
+        "correct context or retry read"
+      ],
+      "execution_class": "interactive",
+      "future_semantic_families": [
+        "chain",
+        "setll-reade",
+        "subfile-pagination"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-RPG-CHAIN-0001",
+        "IBMSEM-RPG-CHAIN-0002"
+      ],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-ACCT-0001",
+      "title": "Account and transaction inquiry",
+      "business_purpose": "Inspect balances, holds and paged history",
+      "initiating_actor": "customer service user",
+      "inputs": [
+        "account ID",
+        "date range"
+      ],
+      "modules": [
+        "accounts"
+      ],
+      "components": [
+        "RES-ACCT-CORE",
+        "RES-ACCT-TXN",
+        "RES-UI-SERVICE"
+      ],
+      "database_entities": [
+        "ACCOUNT",
+        "BALANCE",
+        "HOLD",
+        "ACCOUNT_TRANSACTION"
+      ],
+      "ibmi_objects": [
+        "ACCTPF",
+        "ACCTTXN",
+        "DSPF"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-RPG-CHAIN",
+        "IBMICAP-RPG-READP",
+        "IBMICAP-SQL-EMBEDDED",
+        "IBMICAP-5250-SUBFILE"
+      ],
+      "synchronous_interactions": [
+        "account and transaction services"
+      ],
+      "asynchronous_interactions": [],
+      "external_dependencies": [],
+      "expected_outputs": [
+        "balance and paged history"
+      ],
+      "transactional_boundaries": [
+        "consistent read boundary"
+      ],
+      "security_context": [
+        "customer-service role"
+      ],
+      "failure_paths": [
+        "missing account",
+        "lock wait",
+        "invalid range"
+      ],
+      "recovery_path": [
+        "refresh or operator referral"
+      ],
+      "execution_class": "interactive",
+      "future_semantic_families": [
+        "keyed-io",
+        "reverse-read",
+        "cursor"
+      ],
+      "semantic_case_ids": [],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-PAY-0001",
+      "title": "Capture and post payment",
+      "business_purpose": "Authorize and atomically post a payment",
+      "initiating_actor": "payment clerk or API",
+      "inputs": [
+        "payment instruction",
+        "correlation ID"
+      ],
+      "modules": [
+        "payments",
+        "accounts",
+        "accounting"
+      ],
+      "components": [
+        "RES-PAY-ENTRY",
+        "RES-PAY-POST",
+        "RES-ACCT-TXN",
+        "RES-GL-GATEWAY"
+      ],
+      "database_entities": [
+        "PAYMENT",
+        "ACCOUNT_TRANSACTION",
+        "JOURNAL_ENTRY",
+        "OUTBOX"
+      ],
+      "ibmi_objects": [
+        "PAYMENT tables",
+        "PAYPOSTQ",
+        "JRN"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-DB-COMMIT",
+        "IBMICAP-DB-JOURNAL",
+        "IBMICAP-DTAQ",
+        "IBMICAP-SQL-EMBEDDED",
+        "IBMICAP-RPG-WRITE"
+      ],
+      "synchronous_interactions": [
+        "validation",
+        "authorization contract",
+        "posting"
+      ],
+      "asynchronous_interactions": [
+        "ledger notification",
+        "customer notification"
+      ],
+      "external_dependencies": [
+        "payment network"
+      ],
+      "expected_outputs": [
+        "posted payment",
+        "account transaction",
+        "outbox"
+      ],
+      "transactional_boundaries": [
+        "financial records and outbox commit atomically"
+      ],
+      "security_context": [
+        "payment-post role"
+      ],
+      "failure_paths": [
+        "duplicate",
+        "decline",
+        "lock conflict",
+        "constraint failure",
+        "worker unavailable"
+      ],
+      "recovery_path": [
+        "rollback or idempotent replay; reconcile"
+      ],
+      "execution_class": "hybrid",
+      "future_semantic_families": [
+        "commit-rollback",
+        "dtaq-worker",
+        "embedded-sql",
+        "locks"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-RPG-WRITE-0001",
+        "IBMSEM-RPG-UPDATE-0001",
+        "IBMSEM-SQL-SELECT-0001"
+      ],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-PAY-0002",
+      "title": "Reverse or return payment",
+      "business_purpose": "Undo or return a previously posted payment with audit",
+      "initiating_actor": "payments specialist",
+      "inputs": [
+        "original payment",
+        "reason"
+      ],
+      "modules": [
+        "payments",
+        "accounts",
+        "accounting"
+      ],
+      "components": [
+        "RES-PAY-POST",
+        "RES-ACCT-TXN",
+        "RES-GL-GATEWAY"
+      ],
+      "database_entities": [
+        "PAYMENT",
+        "REVERSAL",
+        "ACCOUNT_TRANSACTION",
+        "JOURNAL_ENTRY"
+      ],
+      "ibmi_objects": [
+        "journaled files",
+        "RESMSGF"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-DB-COMMIT",
+        "IBMICAP-RPG-UPDATE",
+        "IBMICAP-MSG-ESCAPE"
+      ],
+      "synchronous_interactions": [
+        "eligibility and reversal posting"
+      ],
+      "asynchronous_interactions": [
+        "notification"
+      ],
+      "external_dependencies": [
+        "payment network"
+      ],
+      "expected_outputs": [
+        "reversal",
+        "balancing entries"
+      ],
+      "transactional_boundaries": [
+        "new compensating transaction; original immutable"
+      ],
+      "security_context": [
+        "payment-approval role"
+      ],
+      "failure_paths": [
+        "already reversed",
+        "closed period",
+        "authority denial"
+      ],
+      "recovery_path": [
+        "manual exception or approved next-period adjustment"
+      ],
+      "execution_class": "interactive",
+      "future_semantic_families": [
+        "update",
+        "compensation",
+        "escape-message"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-RPG-UPDATE-0001"
+      ],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-PAY-0003",
+      "title": "Reconcile payment settlement",
+      "business_purpose": "Match posted payments to network settlement",
+      "initiating_actor": "scheduled batch",
+      "inputs": [
+        "settlement file",
+        "business date"
+      ],
+      "modules": [
+        "payments",
+        "documents"
+      ],
+      "components": [
+        "RES-PAY-RECON",
+        "RES-DOC-INTAKE"
+      ],
+      "database_entities": [
+        "PAYMENT",
+        "SETTLEMENT",
+        "RECONCILIATION"
+      ],
+      "ibmi_objects": [
+        "multi-member staging PF",
+        "IFS file"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-IFS-STREAM",
+        "IBMICAP-DB-MEMBER",
+        "IBMICAP-COBOL-BATCH"
+      ],
+      "synchronous_interactions": [
+        "file validation"
+      ],
+      "asynchronous_interactions": [
+        "exception queue"
+      ],
+      "external_dependencies": [
+        "SFTP payment network"
+      ],
+      "expected_outputs": [
+        "matched totals",
+        "exceptions",
+        "report"
+      ],
+      "transactional_boundaries": [
+        "commit by settlement group with checkpoint"
+      ],
+      "security_context": [
+        "payment-batch profile"
+      ],
+      "failure_paths": [
+        "malformed file",
+        "duplicate file",
+        "partial failure"
+      ],
+      "recovery_path": [
+        "quarantine or resume from checkpoint"
+      ],
+      "execution_class": "batch",
+      "future_semantic_families": [
+        "member-processing",
+        "cobol-file-io",
+        "restart"
+      ],
+      "semantic_case_ids": [],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-ORD-0001",
+      "title": "Capture and fulfill order",
+      "business_purpose": "Price, reserve, fulfill and bill an order",
+      "initiating_actor": "sales user or API",
+      "inputs": [
+        "customer",
+        "order lines"
+      ],
+      "modules": [
+        "orders",
+        "inventory",
+        "billing"
+      ],
+      "components": [
+        "RES-ORD-CORE",
+        "RES-INV-CORE",
+        "RES-BILL-INVOICE"
+      ],
+      "database_entities": [
+        "ORDER",
+        "ORDER_LINE",
+        "STOCK_BALANCE",
+        "RESERVATION",
+        "INVOICE"
+      ],
+      "ibmi_objects": [
+        "SQL tables",
+        "allocation DTAQ"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-DB-CONSTRAINT",
+        "IBMICAP-DB-LOCK",
+        "IBMICAP-DTAQ"
+      ],
+      "synchronous_interactions": [
+        "pricing and order commit"
+      ],
+      "asynchronous_interactions": [
+        "stock allocation",
+        "invoice generation"
+      ],
+      "external_dependencies": [
+        "tax REST contract"
+      ],
+      "expected_outputs": [
+        "confirmed or backordered order"
+      ],
+      "transactional_boundaries": [
+        "order commit then idempotent downstream states"
+      ],
+      "security_context": [
+        "sales role"
+      ],
+      "failure_paths": [
+        "price error",
+        "stock contention",
+        "tax outage"
+      ],
+      "recovery_path": [
+        "rollback capture or resume downstream"
+      ],
+      "execution_class": "hybrid",
+      "future_semantic_families": [
+        "constraints",
+        "lock-contention",
+        "async-state-machine"
+      ],
+      "semantic_case_ids": [],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-INV-0001",
+      "title": "Replenish inventory",
+      "business_purpose": "Calculate and issue stock replenishment",
+      "initiating_actor": "scheduled batch",
+      "inputs": [
+        "stock thresholds",
+        "supplier rules"
+      ],
+      "modules": [
+        "inventory"
+      ],
+      "components": [
+        "RES-INV-REPLEN",
+        "RES-INV-CORE"
+      ],
+      "database_entities": [
+        "STOCK_BALANCE",
+        "MOVEMENT",
+        "REPLENISHMENT"
+      ],
+      "ibmi_objects": [
+        "JOBQ",
+        "PRTF"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-JOB-SBMJOB",
+        "IBMICAP-COBOL-BATCH",
+        "IBMICAP-SPOOL-PRTF"
+      ],
+      "synchronous_interactions": [
+        "stock scan"
+      ],
+      "asynchronous_interactions": [
+        "purchase request export"
+      ],
+      "external_dependencies": [
+        "supplier SFTP"
+      ],
+      "expected_outputs": [
+        "replenishment orders",
+        "exception report"
+      ],
+      "transactional_boundaries": [
+        "checkpointed location groups"
+      ],
+      "security_context": [
+        "inventory-batch profile"
+      ],
+      "failure_paths": [
+        "supplier outage",
+        "concurrent movement",
+        "job end"
+      ],
+      "recovery_path": [
+        "resume group; reconcile totals"
+      ],
+      "execution_class": "batch",
+      "future_semantic_families": [
+        "sbmjob",
+        "cobol-batch",
+        "spool"
+      ],
+      "semantic_case_ids": [],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-BILL-0001",
+      "title": "Generate invoices and apply cash",
+      "business_purpose": "Bill fulfilled orders and apply receipts",
+      "initiating_actor": "billing batch and clerk",
+      "inputs": [
+        "fulfilled orders",
+        "payments"
+      ],
+      "modules": [
+        "billing",
+        "orders",
+        "payments"
+      ],
+      "components": [
+        "RES-BILL-INVOICE",
+        "RES-BILL-COLLECT"
+      ],
+      "database_entities": [
+        "INVOICE",
+        "INVOICE_LINE",
+        "PAYMENT_APPLICATION",
+        "AGING"
+      ],
+      "ibmi_objects": [
+        "SQL tables",
+        "PRTF"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-SQL-PROCEDURE",
+        "IBMICAP-DB-DECIMAL",
+        "IBMICAP-SPOOL-PRTF"
+      ],
+      "synchronous_interactions": [
+        "invoice procedure"
+      ],
+      "asynchronous_interactions": [
+        "statement request"
+      ],
+      "external_dependencies": [],
+      "expected_outputs": [
+        "invoice",
+        "aging update",
+        "spool"
+      ],
+      "transactional_boundaries": [
+        "invoice atomic; application independently atomic"
+      ],
+      "security_context": [
+        "billing role"
+      ],
+      "failure_paths": [
+        "rounding",
+        "duplicate application",
+        "closed invoice"
+      ],
+      "recovery_path": [
+        "reverse application or manual queue"
+      ],
+      "execution_class": "hybrid",
+      "future_semantic_families": [
+        "sql-routine",
+        "decimal",
+        "print"
+      ],
+      "semantic_case_ids": [],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-GL-0001",
+      "title": "Post subledger to general ledger",
+      "business_purpose": "Create balanced ledger entries from domain events",
+      "initiating_actor": "ledger worker",
+      "inputs": [
+        "subledger event"
+      ],
+      "modules": [
+        "accounting"
+      ],
+      "components": [
+        "RES-GL-GATEWAY",
+        "RES-GL-LEGACY"
+      ],
+      "database_entities": [
+        "JOURNAL_ENTRY",
+        "JOURNAL_LINE",
+        "GL_BALANCE"
+      ],
+      "ibmi_objects": [
+        "GLJRNPF",
+        "GLBALPF",
+        "BNDDIR"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-ILE-BIND",
+        "IBMICAP-COBOL-BATCH",
+        "IBMICAP-DB-JOURNAL",
+        "IBMICAP-PGM-CALL"
+      ],
+      "synchronous_interactions": [
+        "service-to-legacy program call"
+      ],
+      "asynchronous_interactions": [],
+      "external_dependencies": [],
+      "expected_outputs": [
+        "balanced ledger posting"
+      ],
+      "transactional_boundaries": [
+        "header/lines/balance commit together"
+      ],
+      "security_context": [
+        "ledger service profile"
+      ],
+      "failure_paths": [
+        "unbalanced entry",
+        "signature mismatch",
+        "record lock"
+      ],
+      "recovery_path": [
+        "rollback and accounting exception"
+      ],
+      "execution_class": "asynchronous",
+      "future_semantic_families": [
+        "ile-binding",
+        "program-call",
+        "journal"
+      ],
+      "semantic_case_ids": [
+        "IBMSEM-CL-CALL-0001"
+      ],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-GL-0002",
+      "title": "Close accounting period",
+      "business_purpose": "Reconcile and close an accounting period",
+      "initiating_actor": "finance controller",
+      "inputs": [
+        "period",
+        "approval"
+      ],
+      "modules": [
+        "accounting",
+        "batch",
+        "reporting"
+      ],
+      "components": [
+        "RES-GL-CLOSE",
+        "RES-BATCH-CONTROL",
+        "RES-RPT-ENGINE"
+      ],
+      "database_entities": [
+        "PERIOD",
+        "GL_BALANCE",
+        "RECONCILIATION",
+        "BATCH_RUN"
+      ],
+      "ibmi_objects": [
+        "JOBQ",
+        "MSGQ",
+        "PRTF",
+        "OUTQ"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-JOB-SBMJOB",
+        "IBMICAP-MSG-INQUIRY",
+        "IBMICAP-SPOOL-OUTQ"
+      ],
+      "synchronous_interactions": [
+        "approval checks"
+      ],
+      "asynchronous_interactions": [
+        "close jobs",
+        "reports"
+      ],
+      "external_dependencies": [],
+      "expected_outputs": [
+        "closed period",
+        "trial balance",
+        "audit report"
+      ],
+      "transactional_boundaries": [
+        "checkpointed stages; final close once reconciled"
+      ],
+      "security_context": [
+        "finance-controller plus SoD"
+      ],
+      "failure_paths": [
+        "unbalanced ledger",
+        "MSGW",
+        "job failure"
+      ],
+      "recovery_path": [
+        "reply/repair/restart before final close"
+      ],
+      "execution_class": "batch",
+      "future_semantic_families": [
+        "job-graph",
+        "inquiry-msgw",
+        "period-close"
+      ],
+      "semantic_case_ids": [],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-TRD-0001",
+      "title": "Allocate and settle trades",
+      "business_purpose": "Process bounded trading line through settlement",
+      "initiating_actor": "trading user and batch",
+      "inputs": [
+        "trade order",
+        "executions"
+      ],
+      "modules": [
+        "trading",
+        "accounting"
+      ],
+      "components": [
+        "RES-TRADE-CORE",
+        "RES-TRADE-SETTLE",
+        "RES-GL-GATEWAY"
+      ],
+      "database_entities": [
+        "TRADE",
+        "ALLOCATION",
+        "SETTLEMENT",
+        "POSITION"
+      ],
+      "ibmi_objects": [
+        "SQL tables",
+        "DTAQ"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-COBOL-BATCH",
+        "IBMICAP-DB-DECIMAL",
+        "IBMICAP-DTAQ"
+      ],
+      "synchronous_interactions": [
+        "trade capture"
+      ],
+      "asynchronous_interactions": [
+        "allocation and settlement workers"
+      ],
+      "external_dependencies": [
+        "clearing MQ"
+      ],
+      "expected_outputs": [
+        "allocations",
+        "confirmation",
+        "position"
+      ],
+      "transactional_boundaries": [
+        "trade atomic; settlement state machine"
+      ],
+      "security_context": [
+        "trading roles"
+      ],
+      "failure_paths": [
+        "allocation mismatch",
+        "late message",
+        "settlement reject"
+      ],
+      "recovery_path": [
+        "exception repair and replay"
+      ],
+      "execution_class": "hybrid",
+      "future_semantic_families": [
+        "high-volume-cobol",
+        "decimal",
+        "queue"
+      ],
+      "semantic_case_ids": [],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-EOD-0001",
+      "title": "Run enterprise end of day",
+      "business_purpose": "Close the business date across subledgers",
+      "initiating_actor": "scheduler/operator",
+      "inputs": [
+        "business date",
+        "run plan"
+      ],
+      "modules": [
+        "batch",
+        "payments",
+        "inventory",
+        "billing",
+        "accounting",
+        "reporting"
+      ],
+      "components": [
+        "RES-BATCH-EOD",
+        "RES-BATCH-CONTROL",
+        "RES-GL-CLOSE",
+        "RES-RPT-ENGINE"
+      ],
+      "database_entities": [
+        "BATCH_RUN",
+        "BATCH_STEP",
+        "CHECKPOINT"
+      ],
+      "ibmi_objects": [
+        "JOBQ",
+        "JOBD",
+        "SBSD",
+        "MSGQ",
+        "PRTF",
+        "OUTQ",
+        "DTAARA"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-JOB-SBMJOB",
+        "IBMICAP-JOB-SBSD",
+        "IBMICAP-MSG-INQUIRY",
+        "IBMICAP-SPOOL-OUTQ",
+        "IBMICAP-DTAARA"
+      ],
+      "synchronous_interactions": [
+        "run control"
+      ],
+      "asynchronous_interactions": [
+        "submitted dependency jobs"
+      ],
+      "external_dependencies": [],
+      "expected_outputs": [
+        "reconciled date",
+        "reports",
+        "advanced business date"
+      ],
+      "transactional_boundaries": [
+        "each step checkpointed; final date advance guarded"
+      ],
+      "security_context": [
+        "batch controller and operator"
+      ],
+      "failure_paths": [
+        "held job",
+        "MSGW",
+        "partial processing",
+        "spool failure"
+      ],
+      "recovery_path": [
+        "resume/replay/compensate/manual by step policy"
+      ],
+      "execution_class": "batch",
+      "future_semantic_families": [
+        "work-management",
+        "msgw",
+        "restart",
+        "spool"
+      ],
+      "semantic_case_ids": [],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-OPS-0001",
+      "title": "Resolve operator inquiry",
+      "business_purpose": "Review and answer a recoverable job inquiry",
+      "initiating_actor": "operations user",
+      "inputs": [
+        "exception ID",
+        "reply"
+      ],
+      "modules": [
+        "operations"
+      ],
+      "components": [
+        "RES-OPS-MESSAGES",
+        "RES-UI-OPS"
+      ],
+      "database_entities": [
+        "OPERATOR_EXCEPTION",
+        "AUDIT_EVENT"
+      ],
+      "ibmi_objects": [
+        "MSGQ",
+        "DSPF"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-MSG-INQUIRY",
+        "IBMICAP-5250-DSPF"
+      ],
+      "synchronous_interactions": [
+        "dashboard inquiry"
+      ],
+      "asynchronous_interactions": [
+        "job continuation"
+      ],
+      "external_dependencies": [],
+      "expected_outputs": [
+        "recorded reply",
+        "continued/held job"
+      ],
+      "transactional_boundaries": [
+        "no financial mutation in console"
+      ],
+      "security_context": [
+        "operations role"
+      ],
+      "failure_paths": [
+        "unauthorized reply",
+        "timeout",
+        "job ended"
+      ],
+      "recovery_path": [
+        "escalate or close stale inquiry"
+      ],
+      "execution_class": "interactive",
+      "future_semantic_families": [
+        "inquiry-reply",
+        "msgw",
+        "authority"
+      ],
+      "semantic_case_ids": [],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-OPS-0002",
+      "title": "Monitor and recover batch job",
+      "business_purpose": "Correlate job state and restart a failed step",
+      "initiating_actor": "operations user",
+      "inputs": [
+        "batch run",
+        "job identity"
+      ],
+      "modules": [
+        "operations",
+        "batch"
+      ],
+      "components": [
+        "RES-OPS-MONITOR",
+        "RES-BATCH-CONTROL"
+      ],
+      "database_entities": [
+        "BATCH_RUN",
+        "BATCH_STEP"
+      ],
+      "ibmi_objects": [
+        "USRSPC",
+        "JOBQ",
+        "MSGQ"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-API-USRSPC",
+        "IBMICAP-JOB-STATUS",
+        "IBMICAP-CLLE",
+        "IBMICAP-REXX-OPS"
+      ],
+      "synchronous_interactions": [
+        "job/status inspection"
+      ],
+      "asynchronous_interactions": [
+        "restart submission"
+      ],
+      "external_dependencies": [],
+      "expected_outputs": [
+        "diagnosis",
+        "approved restart"
+      ],
+      "transactional_boundaries": [
+        "restart policy controls mutation"
+      ],
+      "security_context": [
+        "operations role"
+      ],
+      "failure_paths": [
+        "missing job log",
+        "stuck job",
+        "bad checkpoint"
+      ],
+      "recovery_path": [
+        "manual reconciliation before restart"
+      ],
+      "execution_class": "hybrid",
+      "future_semantic_families": [
+        "system-api",
+        "job-status",
+        "restart"
+      ],
+      "semantic_case_ids": [],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-RPT-0001",
+      "title": "Generate and deliver customer statement",
+      "business_purpose": "Create, route and archive statement output",
+      "initiating_actor": "scheduled batch",
+      "inputs": [
+        "account",
+        "statement period"
+      ],
+      "modules": [
+        "reporting",
+        "accounts",
+        "documents"
+      ],
+      "components": [
+        "RES-RPT-ENGINE",
+        "RES-RPT-ROUTER",
+        "RES-DOC-EXPORT"
+      ],
+      "database_entities": [
+        "ACCOUNT_TRANSACTION",
+        "REPORT_RUN",
+        "DOCUMENT"
+      ],
+      "ibmi_objects": [
+        "PRTF",
+        "spool file",
+        "OUTQ",
+        "IFS"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-SPOOL-PRTF",
+        "IBMICAP-SPOOL-OUTQ",
+        "IBMICAP-IFS-STREAM"
+      ],
+      "synchronous_interactions": [
+        "report generation"
+      ],
+      "asynchronous_interactions": [
+        "print/archive routing"
+      ],
+      "external_dependencies": [
+        "SMTP or SFTP"
+      ],
+      "expected_outputs": [
+        "statement spool",
+        "archive",
+        "delivery manifest"
+      ],
+      "transactional_boundaries": [
+        "report run idempotency prevents duplicate delivery"
+      ],
+      "security_context": [
+        "report service profile"
+      ],
+      "failure_paths": [
+        "spool held",
+        "OUTQ unavailable",
+        "archive authority"
+      ],
+      "recovery_path": [
+        "release/reroute/rebuild from report run"
+      ],
+      "execution_class": "batch",
+      "future_semantic_families": [
+        "prtf",
+        "spool-routing",
+        "ifs-archive"
+      ],
+      "semantic_case_ids": [],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-DOC-0001",
+      "title": "Process inbound partner file",
+      "business_purpose": "Validate, stage and apply a partner file",
+      "initiating_actor": "integration worker",
+      "inputs": [
+        "stream file",
+        "manifest"
+      ],
+      "modules": [
+        "documents",
+        "integration"
+      ],
+      "components": [
+        "RES-DOC-INTAKE",
+        "RES-INT-GATEWAY"
+      ],
+      "database_entities": [
+        "DOCUMENT",
+        "TRANSMISSION",
+        "INBOX"
+      ],
+      "ibmi_objects": [
+        "IFS",
+        "staging PF members"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-IFS-CCSID",
+        "IBMICAP-QSH-PASE",
+        "IBMICAP-DB-MEMBER"
+      ],
+      "synchronous_interactions": [
+        "intake validation"
+      ],
+      "asynchronous_interactions": [
+        "domain dispatch"
+      ],
+      "external_dependencies": [
+        "SFTP/FTP/NDM"
+      ],
+      "expected_outputs": [
+        "accepted/quarantined document",
+        "acknowledgement"
+      ],
+      "transactional_boundaries": [
+        "intake identity commit before dispatch"
+      ],
+      "security_context": [
+        "integration profile"
+      ],
+      "failure_paths": [
+        "malformed",
+        "wrong CCSID",
+        "duplicate",
+        "authority failure"
+      ],
+      "recovery_path": [
+        "quarantine, correct mapping, deterministic replay"
+      ],
+      "execution_class": "asynchronous",
+      "future_semantic_families": [
+        "ccsid",
+        "member-staging",
+        "file-authority"
+      ],
+      "semantic_case_ids": [],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-INT-0001",
+      "title": "Exchange payment event over MQ",
+      "business_purpose": "Publish and consume correlated financial events",
+      "initiating_actor": "integration worker",
+      "inputs": [
+        "outbox event"
+      ],
+      "modules": [
+        "integration",
+        "payments"
+      ],
+      "components": [
+        "RES-INT-GATEWAY",
+        "RES-PAY-POST"
+      ],
+      "database_entities": [
+        "OUTBOX",
+        "INBOX",
+        "TRANSMISSION"
+      ],
+      "ibmi_objects": [
+        "DTAQ",
+        "MQ objects"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-INTEG-MQ",
+        "IBMICAP-DTAQ",
+        "IBMICAP-DB-COMMIT"
+      ],
+      "synchronous_interactions": [
+        "outbox claim"
+      ],
+      "asynchronous_interactions": [
+        "MQ put/get and acknowledgement"
+      ],
+      "external_dependencies": [
+        "IBM MQ simulator or product"
+      ],
+      "expected_outputs": [
+        "correlated delivery state"
+      ],
+      "transactional_boundaries": [
+        "claim/delivery acknowledgement state machine"
+      ],
+      "security_context": [
+        "integration service profile"
+      ],
+      "failure_paths": [
+        "MQ unavailable",
+        "duplicate",
+        "poison payload",
+        "timeout"
+      ],
+      "recovery_path": [
+        "retry policy, dead-letter exception, replay"
+      ],
+      "execution_class": "asynchronous",
+      "future_semantic_families": [
+        "mq-contract",
+        "outbox",
+        "duplicate-delivery"
+      ],
+      "semantic_case_ids": [],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-INT-0002",
+      "title": "Serve customer REST/SOAP inquiry",
+      "business_purpose": "Expose authorized customer/account inquiry",
+      "initiating_actor": "external client",
+      "inputs": [
+        "request",
+        "identity claims"
+      ],
+      "modules": [
+        "integration",
+        "customer",
+        "accounts"
+      ],
+      "components": [
+        "RES-INT-WEB",
+        "RES-CUST-QUERY",
+        "RES-ACCT-CORE"
+      ],
+      "database_entities": [
+        "CUSTOMER",
+        "ACCOUNT"
+      ],
+      "ibmi_objects": [
+        "prestart job",
+        "job log"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-JAVA-HTTP",
+        "IBMICAP-JOB-PRESTART",
+        "IBMICAP-SEC-AUTH"
+      ],
+      "synchronous_interactions": [
+        "service call"
+      ],
+      "asynchronous_interactions": [],
+      "external_dependencies": [
+        "HTTP/SOAP client"
+      ],
+      "expected_outputs": [
+        "response or contract error"
+      ],
+      "transactional_boundaries": [
+        "read-only request"
+      ],
+      "security_context": [
+        "external service identity"
+      ],
+      "failure_paths": [
+        "malformed request",
+        "authority denial",
+        "timeout"
+      ],
+      "recovery_path": [
+        "contract error; no partial state"
+      ],
+      "execution_class": "service",
+      "future_semantic_families": [
+        "java-http",
+        "prestart-job",
+        "security"
+      ],
+      "semantic_case_ids": [],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-INT-0003",
+      "title": "Consume socket market feed",
+      "business_purpose": "Receive framed data and update staging",
+      "initiating_actor": "integration autostart worker",
+      "inputs": [
+        "binary frames"
+      ],
+      "modules": [
+        "integration",
+        "trading"
+      ],
+      "components": [
+        "RES-INT-SOCKET",
+        "RES-TRADE-CORE"
+      ],
+      "database_entities": [
+        "MARKET_EVENT",
+        "TRANSMISSION"
+      ],
+      "ibmi_objects": [
+        "socket",
+        "USRSPC",
+        "DTAQ"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-C-SOCKET",
+        "IBMICAP-API-USRSPC",
+        "IBMICAP-DTAQ"
+      ],
+      "synchronous_interactions": [
+        "frame parsing"
+      ],
+      "asynchronous_interactions": [
+        "trade dispatch"
+      ],
+      "external_dependencies": [
+        "market simulator"
+      ],
+      "expected_outputs": [
+        "captured and routed event"
+      ],
+      "transactional_boundaries": [
+        "frame commit independent; sequence checked"
+      ],
+      "security_context": [
+        "integration service profile"
+      ],
+      "failure_paths": [
+        "disconnect",
+        "bad frame",
+        "sequence gap"
+      ],
+      "recovery_path": [
+        "reconnect and deterministic replay"
+      ],
+      "execution_class": "asynchronous",
+      "future_semantic_families": [
+        "sockets",
+        "binary",
+        "user-space"
+      ],
+      "semantic_case_ids": [],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-SEC-0001",
+      "title": "Perform privileged controlled operation",
+      "business_purpose": "Execute one audited adopted-authority action",
+      "initiating_actor": "authorized administrator",
+      "inputs": [
+        "command request",
+        "approval"
+      ],
+      "modules": [
+        "security",
+        "operations"
+      ],
+      "components": [
+        "RES-SEC-AUTH",
+        "RES-SEC-PRIV"
+      ],
+      "database_entities": [
+        "APP_ROLE",
+        "AUDIT_EVENT"
+      ],
+      "ibmi_objects": [
+        "CMD",
+        "AUTL",
+        "USRPRF"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-SEC-AUTL",
+        "IBMICAP-SEC-ADOPT",
+        "IBMICAP-CMD"
+      ],
+      "synchronous_interactions": [
+        "authorization check",
+        "command call"
+      ],
+      "asynchronous_interactions": [],
+      "external_dependencies": [],
+      "expected_outputs": [
+        "action result",
+        "audit event"
+      ],
+      "transactional_boundaries": [
+        "single bounded privileged action"
+      ],
+      "security_context": [
+        "security administrator plus approver"
+      ],
+      "failure_paths": [
+        "SoD conflict",
+        "authority failure",
+        "invalid target"
+      ],
+      "recovery_path": [
+        "no action; reviewed exception"
+      ],
+      "execution_class": "interactive",
+      "future_semantic_families": [
+        "adopted-authority",
+        "autl",
+        "command"
+      ],
+      "semantic_case_ids": [],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-DEPLOY-0001",
+      "title": "Switch application generation",
+      "business_purpose": "Deploy and select a versioned application generation",
+      "initiating_actor": "release operator",
+      "inputs": [
+        "build manifest",
+        "generation"
+      ],
+      "modules": [
+        "operations",
+        "foundation"
+      ],
+      "components": [
+        "RES-BATCH-CONTROL",
+        "RES-FOUND-CONFIG"
+      ],
+      "database_entities": [
+        "DEPLOYMENT_GENERATION",
+        "AUDIT_EVENT"
+      ],
+      "ibmi_objects": [
+        "RESNEW/RESOLD libraries",
+        "DTAARA",
+        "BNDDIR"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-LIBL-RESOLUTION",
+        "IBMICAP-ILE-BIND",
+        "IBMICAP-DTAARA"
+      ],
+      "synchronous_interactions": [
+        "build and validation"
+      ],
+      "asynchronous_interactions": [
+        "controlled job restart"
+      ],
+      "external_dependencies": [],
+      "expected_outputs": [
+        "selected generation",
+        "rollback point"
+      ],
+      "transactional_boundaries": [
+        "switch only after validation"
+      ],
+      "security_context": [
+        "release operator"
+      ],
+      "failure_paths": [
+        "shadow object",
+        "signature mismatch",
+        "active jobs"
+      ],
+      "recovery_path": [
+        "restore prior library list/generation"
+      ],
+      "execution_class": "batch",
+      "future_semantic_families": [
+        "library-list",
+        "binder-signature",
+        "dynamic-resolution"
+      ],
+      "semantic_case_ids": [],
+      "status": "planned"
+    },
+    {
+      "workflow_id": "RES-WF-FAIL-0001",
+      "title": "Exercise controlled recovery scenario",
+      "business_purpose": "Prove failure classification and cleanup without destructive impact",
+      "initiating_actor": "Behavior Lab scheduler",
+      "inputs": [
+        "failure scenario",
+        "leased resources"
+      ],
+      "modules": [
+        "operations",
+        "semantic corpus"
+      ],
+      "components": [
+        "RES-BATCH-CONTROL",
+        "RES-OPS-MONITOR"
+      ],
+      "database_entities": [
+        "TEST_LEASE",
+        "OPERATOR_EXCEPTION"
+      ],
+      "ibmi_objects": [
+        "leased LIB/JOBQ/MSGQ/IFS"
+      ],
+      "platform_capabilities": [
+        "IBMICAP-FAILURE-RECOVERY",
+        "IBMICAP-DB-LOCK",
+        "IBMICAP-MSG-INQUIRY"
+      ],
+      "synchronous_interactions": [
+        "failure injection control"
+      ],
+      "asynchronous_interactions": [
+        "job/queue interactions"
+      ],
+      "external_dependencies": [
+        "deterministic simulator"
+      ],
+      "expected_outputs": [
+        "evidence",
+        "clean lease"
+      ],
+      "transactional_boundaries": [
+        "scenario-specific rollback/checkpoint"
+      ],
+      "security_context": [
+        "isolated test persona"
+      ],
+      "failure_paths": [
+        "job end",
+        "lock",
+        "timeout",
+        "missing object"
+      ],
+      "recovery_path": [
+        "orphan scan and verified cleanup"
+      ],
+      "execution_class": "hybrid",
+      "future_semantic_families": [
+        "failure-recovery",
+        "cleanup",
+        "concurrency"
+      ],
+      "semantic_case_ids": [],
+      "status": "planned"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "workflows": [
+    {"id":"RES-E2E-CUSTOMER-ONBOARDING","title":"Customer onboarding to audited account","steps":["create customer","create account","post opening transaction","post accounting entry","verify audit trail"],"acceptance":"All domain identifiers correlate and committed state is auditable."},
+    {"id":"RES-E2E-PAYMENT","title":"Committed payment and asynchronous notification","steps":["validate payment","commit account changes","publish deterministic notification","post downstream accounting"],"acceptance":"Atomic financial state and exactly characterized notification behavior are evidenced."},
+    {"id":"RES-E2E-END-OF-DAY","title":"End-of-day processing and reconciliation","steps":["submit batch jobs","wait for processing","generate reports","route spool output","reconcile totals"],"acceptance":"Job lineage, output, and reconciliation agree for the controlled business date."},
+    {"id":"RES-E2E-OPERATOR-RECOVERY","title":"Operator intervention and recovery","steps":["induce controlled failure","route inquiry message","capture reply","resume or roll back","verify cleanup"],"acceptance":"Failure and recovery leave no undeclared resources or financial ambiguity."}
+  ]
+}

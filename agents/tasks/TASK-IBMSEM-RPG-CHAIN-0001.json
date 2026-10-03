@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0.0",
+  "task_id": "TASK-IBMSEM-RPG-CHAIN-0001",
+  "semantic_id": "IBMSEM-RPG-CHAIN-0001",
+  "objective": "Complete the customer lookup existing-key fixture and its observable expectations.",
+  "allowed_directories": [
+    "registry/coverage/IBMSEM-RPG-CHAIN-0001.json",
+    "ibmi/rpgle/customers/",
+    "tests/semantic/fixtures/chain-existing/",
+    "docs/coverage/"
+  ],
+  "forbidden_changes": [
+    "Existing semantic IDs or other case meanings",
+    "Registry schemas and status machine",
+    "Global architecture",
+    "Unrelated estate modules"
+  ],
+  "prerequisites": [
+    "IBMSEM-DDS-PF-0001"
+  ],
+  "expected_deliverables": [
+    "Reviewed RPGLE fixture",
+    "Deterministic setup/input/cleanup",
+    "Observable expectation and documentation references",
+    "Offline tests"
+  ],
+  "res_module": "customers",
+  "required_source": [
+    "ibmi/rpgle/customers/CUSTLOOK.rpgle"
+  ],
+  "required_test_fixture": [
+    "Known customer row and requested key"
+  ],
+  "required_setup": "Create/load the customer file in the leased case library.",
+  "required_cleanup": "Remove case data and objects without affecting another lease.",
+  "required_documentation": [
+    "IBM documentation URL for CHAIN and relevant file I/O behavior"
+  ],
+  "verification_requirements": [
+    "Retain UNVERIFIED ON IBM i until authoritative execution",
+    "Mock output is non-authoritative"
+  ],
+  "completion_criteria": [
+    "Exactly one semantic case changed",
+    "res-validate all and tests pass",
+    "Independent reviewer confirms scope"
+  ],
+  "change_scope": "implementation_only",
+  "assigned_role": "implementer",
+  "independent_review": {
+    "required": true,
+    "implementer_may_self_approve": false
+  },
+  "workflow_ids": [
+    "RES-WF-CUST-0002"
+  ],
+  "component_ids": [
+    "RES-CUST-QUERY"
+  ],
+  "capability_ids": [
+    "IBMICAP-RPG-CHAIN"
+  ],
+  "coverage_placement": "business_integrated"
+}

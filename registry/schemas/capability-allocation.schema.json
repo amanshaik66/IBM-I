@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "taxonomy_ref",
+    "allocations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "taxonomy_ref": {
+      "type": "string"
+    },
+    "allocations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "capability_id",
+          "placement",
+          "rationale",
+          "workflow_ids",
+          "component_ids",
+          "primary_languages",
+          "object_types",
+          "semantic_families",
+          "semantic_case_ids",
+          "interaction_targets",
+          "allocation_status"
+        ],
+        "properties": {
+          "capability_id": {
+            "type": "string"
+          },
+          "placement": {
+            "enum": [
+              "business_integrated",
+              "operations_integrated",
+              "semantic_edge"
+            ]
+          },
+          "rationale": {
+            "type": "string"
+          },
+          "workflow_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "component_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "primary_languages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "object_types": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "semantic_families": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            }
+          },
+          "semantic_case_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "interaction_targets": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "allocation_status": {
+            "enum": [
+              "planned",
+              "partially_implemented",
+              "implemented"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

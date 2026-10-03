@@ -1,0 +1,5 @@
+      * UNVERIFIED ON IBM i - foundation fixture IBMSEM-DDS-PF-0001
+     A          R CUSTREC
+     A            CUSTID         9P 0
+     A            CUSTNAME      40A
+     A          K CUSTID

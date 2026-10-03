@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ibmi-res-behavior-lab"
+version = "0.1.0"
+description = "Foundation tooling for the IBM i Reference Enterprise System"
+requires-python = ">=3.11"
+dependencies = ["jsonschema>=4.21,<5"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9", "mypy>=1.10,<2", "ruff>=0.6,<1"]
+
+[project.scripts]
+res-validate = "behavior_lab.validation:main"
+
+[tool.setuptools]
+package-dir = {"" = "controller"}
+
+[tool.setuptools.packages.find]
+where = ["controller"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["behavior_lab"]
+
+[[tool.mypy.overrides]]
+module = "jsonschema"
+ignore_missing_imports = true

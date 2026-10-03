@@ -1,0 +1,16 @@
+{
+ "schema_version":"1.0.0",
+ "states":["specified","source_written","statically_validated","compiled_on_ibmi","executed_on_ibmi","behavior_verified_on_ibmi","integration_verified","blocked","unsupported","requires_investigation"],
+ "initial":"specified",
+ "transitions":{
+  "specified":["source_written","blocked","unsupported","requires_investigation"],
+  "source_written":["statically_validated","blocked","requires_investigation"],
+  "statically_validated":["compiled_on_ibmi","blocked","requires_investigation"],
+  "compiled_on_ibmi":["executed_on_ibmi","blocked","requires_investigation"],
+  "executed_on_ibmi":["behavior_verified_on_ibmi","blocked","requires_investigation"],
+  "behavior_verified_on_ibmi":["integration_verified","blocked"],
+  "integration_verified":[],"blocked":["specified","source_written","statically_validated"],"unsupported":[],"requires_investigation":["specified","source_written","blocked","unsupported"]
+ },
+ "evidence_required_from":["compiled_on_ibmi","executed_on_ibmi","behavior_verified_on_ibmi","integration_verified"],
+ "authoritative_evidence_required":true
+}

@@ -1,0 +1,6 @@
+{
+  "schema_version":"1.0.0",
+  "protocols":["ibm_mq","rest_http","sftp_ftp","connect_direct_ndm","smtp","external_database","other_partner"],
+  "contract":{"request_capture":true,"scripted_responses":true,"failure_injection":true,"latency_and_timeout":true,"correlation_identifiers":true,"deterministic_replay":true},
+  "requirements":["Every script is versioned and content-addressed.","Seeds and virtual-clock inputs are captured in evidence.","Simulator observations are never presented as behavior of the real external product."]
+}
